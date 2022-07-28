@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="../css/mine.css">
+		<link rel="stylesheet" href="../css/vip.css">
+		<link rel="stylesheet" href="../css/nav.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../js/mine.js"></script>
+		<script type="text/javascript" src="../js/vip.js"></script>
+		<script src="/vue/vue.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<!-- <a class="back" href="mine.html"><span class="glyphicon glyphicon-chevron-left"></span></a>
+			<span class="nav_login">会员卡详细页</span> -->
+			<a class="back" href="javascript:history.go(-1)"><span class="nav_login">会员卡详细页</span></a>
+		</nav>
+
+		<!-- MemberShip -->
+		<div class="full-width-div">
+			<div class="row">
+				<!-- Card -->
+				<div class="col-xs-12 col-sm-12 vip_abstract">
+					<div class="col-xs-12 col-sm-12">
+						<!-- Card Graph -->
+						<div class="col-xs-12 col-sm-12">
+							<!-- <div class="card_recommend"></div> -->
+							<div class="card_top">
+								<div class="tag">
+									<p>折扣卡</p>
+								</div>
+								<div class="col-xs-5 col-sm-5 card_logo"></div>
+								<div class="col-xs-7 col-sm-7">
+									<p class="card_title">会员特惠卡</p>
+									<p class="card_subtitle">有效期<span id="card_time">3</span>个月</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-12">
+							<div class="card_bottom">
+								<!-- Help -->
+								<div class="col-xs-6 col-sm-6">
+									<span class="glyphicon glyphicon-question-sign vip_help" data-toggle="modal"
+										data-target="#myModal"><span class="help_click">使用说明</span></span>
+									<!-- Modal -->
+									<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+										aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<!-- <button type="button" class="close" data-dismiss="modal"
+														aria-hidden="true">
+														&times;
+													</button> -->
+													<h4 class="modal-title" id="myModalLabel">
+														使用说明
+													</h4>
+												</div>
+												<div class="modal-body">
+													<p>1.&nbsp;购买本会员卡仅作为购票优惠凭证，卡内无余额，亦不可储值。</p>
+													<p>2.&nbsp;本会员卡一经出售，不可退换。</p>
+													<p>3.&nbsp;少量场次在不使用会员卡时已为最低优惠票价，使用会员卡不再享有额外优惠价格。</p>
+													<p>4.&nbsp;受不同影片和优惠活动的影响，同一影城的权益价有可能发生变动，票价以实际购票时票价为准。</p>
+													<p>&nbsp;</p>
+													<p>&nbsp;</p>
+													<p>&nbsp;</p>
+												</div>
+											</div><!-- /.modal-content -->
+										</div><!-- /.modal -->
+									</div>
+									<!-- <script type="text/javascript" src="./js/modal.js"></script> -->
+								</div>
+								<!-- Price -->
+								<div class="col-xs-6 col-sm-6">
+									<span class="vip_price">售价:￥<span id="card_price">9.9</span></span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Quarter -->
+					<div class="col-xs-12 col-sm-12">
+						<div class="col-xs-6 col-sm-6">
+							<div class="quarter_choice cur" id="three_months" onclick="click_three()">
+								<p class="quarter_intro quarter_margin">季卡</p>
+								<p class="quarter_intro">￥<span>9.9</span></p>
+								<!-- Click -->
+								<i id="choice1"></i>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6">
+							<div class="quarter cur" id="six_months" onclick="click_six()">
+								<p class="quarter_intro quarter_margin">半年卡</p>
+								<p class="quarter_intro">￥<span>19.8</span></p>
+								<!-- Click -->
+								<i id="choice2" style="display: none;"></i>
+							</div>
+						</div>
+						<p class="card_warn">不可储值，不可退换</p>
+					</div>
+				</div>
+
+				<!-- Discount INRO -->
+				<div class="col-xs-12 col-sm-12 discount_abstract">
+					<div class="header">
+						<span class="line"></span>
+						<span class="text">购票优惠</span>
+						<span class="line"></span>
+					</div>
+					<div class="col-xs-2 col-sm-2 discount_img"></div>
+					<div class="col-xs-10 col-sm-10">
+						<p class="discount_title">购票享超值会员价</p>
+						<p class="discount_subtitle">
+							有效期内，在会员卡支持影院购票可享优惠价；
+							享受会员卡优惠的场次及价格动态变化，优惠幅度由影院决定；
+							每天限购4张会员票，超出后需以非优惠价格购买
+						</p>
+					</div>
+				</div>
+
+				<!-- Cinema -->
+				<div class="col-xs-12 col-sm-12 cinema_abstract">
+					<div class="header2">
+						<span class="line"></span>
+						<span class="text">支持影院</span>
+						<span class="line"></span>
+					</div>
+					<div class="cinema_img"></div>
+					<span class="cinema_subtitle">全国所有影院</span>
+				</div>
+
+				<!-- Clause -->
+				<div class="col-xs-12 col-sm-12 clause_abstract">
+					<p class="clause_subtitle">开卡即同意
+						<span data-toggle="modal" data-target="#clause"><u>《会员卡协议》</u></span>
+						<!-- Modal2 -->
+					<div class="modal fade" id="clause" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<!-- <button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">
+											&times;
+										</button> -->
+									<h4 class="modal-title" id="myModalLabel">
+										会员卡协议
+									</h4>
+								</div>
+								<div class="modal-body">
+									<p>*&nbsp;会员卡为虚拟会员卡，仅用于您的会员身份认证，卡内无金额，一经购买，不可退换。购买成功即开始享受会员权益，会员权益为整体权益，不可分割。</p>
+									<p>会员卡可用于在本平台在线选座售票渠道购买支持使用本会员卡的影院的影票时，享受会员价及其他会员优惠。折扣卡不可在其他移动端产品及影院前台消费。</p>
+									<p>1.&nbsp;会员卡购买：您需在本平台在线购票产品中购买会员卡，无需进行线下操作。按照线上引导流程完成开通即可在正常选座流程中使用。</p>
+									<p>2.&nbsp;会员卡购票：本卡支持多中有效期，具体有效期时间请查看卡面对应信息，本卡不可储值，过期失效。持卡人在会员卡有效期内，通过本平台在线选做渠道进行购票，可以享受会员价和会员相关优惠。本平台有权限制单张会员卡在一定时段内的购票次数，以防止非正常用卡行为。受不同影片和优惠活动的影响，同一影院的会员价有可能随时发生变动，对于这些变动，将不另行通知，票价以实际购票时的票价为准。</p>
+									<p>3.&nbsp;持卡人使用会员卡时请同时遵守本平台及会员卡关联影院的相关规定。</p>
+									<p>&nbsp;</p>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+					</p>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Navigation bar -->
+		<nav class="navbar navbar-default navbar-fixed-bottom" style="border: none;">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<button type="button" class="btn btn-warning">
+						<span id="final_quotation">9.9</span>元立即开卡
+					</button>
+				</div>
+				
+			</div>
+		</nav>
+		
+	</body>
+</html>

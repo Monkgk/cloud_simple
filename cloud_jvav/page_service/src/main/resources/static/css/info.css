@@ -1,0 +1,150 @@
+ul li{
+    list-style: none;
+}
+.info_body{
+    display: block;
+    width: 100%;
+    background: white;
+    padding-bottom: 1rem;
+    color: black;
+    font-size: 4rem;
+    height: 14rem;
+}
+.info_body_img{
+    display: block;
+    width: 100%;
+    background: white;
+    padding-bottom: 1rem;
+    color: black;
+    font-size: 4rem;
+    height: 25rem;
+}
+.info_title{
+    padding-left: 3rem;
+    float: left;
+    height: 100%;
+    transform: translateY(33%)
+}
+.info_href{
+    height: 100%;
+    float: right;
+}
+.info_content{
+    padding: 4rem 3rem;
+    float: right;
+    height: 100%;
+}
+.info_content img{
+    height: 100%;
+}
+.info_msg{
+    height: 100%;
+    /*float: right;*/
+    color: #9c9c9c;
+}
+.info_head{
+    width: 100%;
+}
+.info_head img{
+    width:60rem;
+    height:60rem;
+}
+.info_head_body{
+    margin: 10%;
+    height: 78rem;
+}
+.arrow_down{
+    height: 100%;
+    width: 100%;
+    background: url(../img/ui/arrow-down.png) no-repeat right;
+    background-size: 5%;
+    float: right;
+    online:none;
+    border-style: solid;
+    border-color: #9c9c9c;
+    border-width: 0px 0px 1px;
+    height: 8rem;
+    font-size: 3rem;
+}
+.divInput{
+    text-align: center;
+}
+.list{
+    /*width: 150px;*/
+    border: 1px solid #cccccc;
+    overflow: hidden;
+}
+.list ul{
+    padding: 0;
+    margin: 0;
+}
+.list ul li{
+    cursor: pointer;
+    padding-top: 1.5rem;
+}
+.list ul li:hover{
+    background-color: #cccccc;
+}
+.msg_right {
+    height: 100%;
+    background: url(../img/ui/right.png) no-repeat right;
+    background-size: 25%;
+    float: right;
+    margin-right: 5rem;
+}
+.change_head_save{
+    background: #dd3f3b;
+    font-size: 20pt;
+    color: black;
+    height: 6rem;
+    width: 50%;
+    border-radius: 50rem;
+    /*box-shadow: 0 0 30px #ad2522;*/
+    margin: 0 auto;
+}
+.change_save{
+    background: whitesmoke;
+    float: right;
+    font-size: 20pt;
+    color: black;
+    height: 47%;
+    width: 15rem;
+    border-radius: 50rem;
+    box-shadow: 0 0 30px #ad2522;
+    margin: 3.4rem 2rem;
+    position: absolute;
+    right: 2rem;
+    top: 0px;
+}
+.change_body{
+    width: 100%;
+    padding: 2rem;
+}
+.change_head_input{
+    width: 50%;
+    online:none;
+    background: none;
+    border-style: solid;
+    border-color: #9c9c9c;
+    border-width: 0px 0px 1px;
+    height: 8rem;
+    font-size: 3rem;
+    margin:0 auto 3rem;
+    padding: 1rem;
+}
+.change_input{
+    width: 100%;
+    online:none;
+    background: none;
+    border-style: solid;
+    border-color: #9c9c9c;
+    border-width: 0px 0px 1px;
+    height: 8rem;
+    font-size: 3rem;
+}
+.tip_text{
+    font-size: 2rem;
+    color: red;
+    float: left;
+    margin-top: 1rem;
+}

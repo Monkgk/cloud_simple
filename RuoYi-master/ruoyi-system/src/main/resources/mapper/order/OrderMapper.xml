@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.OrderMapper">
+
+    <resultMap type="com.common.Entity.Order" id="OrderResult">
+        <id property="order_id" column="order_id"/>
+        <result property="user_id" column="user_id"/>
+        <result property="total" column="total"/>
+        <result property="order_status" column="order_status"/>
+        <result property="create_time" column="create_time"/>
+        <result property="cinema_name" column="cinema_name"/>
+        <result property="film_name" column="film_name"/>
+    </resultMap>
+
+    <sql id="selectOrderVo">
+        select order_id, user_id, total, order_status, t1.create_time create_time, cinema_name, film_name
+        from orders t1
+                 left join session t2 on t1.session_id = t2.session_id
+                 left join cinema t3 on t2.cinema_id = t3.cinema_id
+                 left join film t4
+                           on t2.film_id = t4.film_id
+    </sql>
+
+    <select id="selectOrderList" parameterType="com.common.Entity.Order" resultMap="OrderResult">
+        <include refid="selectOrderVo"/>
+        <where>
+            <if test="order_id != null and order_id != ''">
+                AND order_id like concat('%', #{order_id}, '%')
+            </if>
+            <if test="order_status != null and order_status != ''">
+                AND order_status = #{order_status}
+            </if>
+            <if test="film_name != null and film_name != ''">
+                AND film_name like concat('%', #{film_name}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectOrderAll" resultMap="OrderResult">
+        <include refid="selectOrderVo"/>
+    </select>
+
+</mapper> 

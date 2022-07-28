@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ActorMapper">
+
+	<resultMap type="com.common.Entity.Actor" id="ActorResult">
+		<id     property="actor_id"        column="actor_id"       />
+		<result property="actor_name"      column="actor_name"     />
+		<result property="actor_picture"      column="actor_picture"     />
+		<result property="actor_sex"      column="actor_sex"     />
+		<result property="actor_status"      column="actor_status"     />
+		<result property="create_time"      column="create_time"     />
+	</resultMap>
+	
+	<sql id="selectActorVo">
+        select actor_id,actor_name,actor_sex,actor_status,actor_picture,create_time
+		from actor
+    </sql>
+	
+	<select id="selectActorList" parameterType="com.common.Entity.Actor" resultMap="ActorResult">
+	    <include refid="selectActorVo"/>
+		<where>
+			<if test="actor_id != null and actor_id != 0">
+				AND actor_id = #{actor_id}
+			</if>
+			<if test="actor_status != null and actor_status != ''">
+				AND actor_status = #{actor_status}
+			</if>
+			<if test="actor_name != null and actor_name != ''">
+				AND actor_name like concat('%', #{actor_name}, '%')
+			</if>
+			<if test="actor_sex != null and actor_sex != ''">
+				AND actor_sex = #{actor_sex}
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectActorAll" resultMap="ActorResult">
+		<include refid="selectActorVo"/>
+	</select>
+
+	
+	<select id="selectActorById" parameterType="Integer" resultMap="ActorResult">
+		<include refid="selectActorVo"/>
+		where actor_id = #{actor_id}
+	</select>
+	
+
+	
+ 	<delete id="deleteActorByIds" parameterType="Integer">
+ 		delete from actor where actor_id in
+ 		<foreach collection="array" item="actor_id" open="(" separator="," close=")">
+ 			#{actor_id}
+        </foreach> 
+ 	</delete>
+ 	
+ 	<update id="updateActor" parameterType="com.common.Entity.Actor">
+ 		update actor
+ 		<set>
+ 			<if test="actor_name != null and actor_name != ''">actor_name = #{actor_name},</if>
+			<if test="actor_sex != null and actor_sex != ''">actor_sex = #{actor_sex},</if>
+			<if test="actor_picture != null and actor_picture != ''">actor_picture=#{actor_picture},</if>
+ 			<if test="actor_status != null and actor_status != ''">actor_status = #{actor_status},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where actor_id = #{actor_id}
+	</update>
+ 	
+ 	<insert id="insertActor" parameterType="com.common.Entity.Actor" useGeneratedKeys="true" keyProperty="actor_id">
+ 		insert into actor(
+ 			<if test="actor_sex != null and actor_sex != ''">actor_sex,</if>
+ 			<if test="actor_name != null and actor_name != ''">actor_name,</if>
+			<if test="actor_picture != null and actor_picture != ''">actor_picture,</if>
+ 			<if test="actor_status != null and actor_status != ''">actor_status,</if>
+ 			create_time
+ 		)values(
+			<if test="actor_sex != null and actor_sex != ''">#{actor_sex},</if>
+			<if test="actor_name != null and actor_name != ''">#{actor_name},</if>
+			<if test="actor_picture != null and actor_picture != ''">#{actor_picture},</if>
+			<if test="actor_status != null and actor_status != ''">#{actor_status},</if>
+ 			sysdate()
+ 		)
+	</insert>
+
+</mapper> 

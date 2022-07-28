@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>JVAV电影</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/message_list.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/bill.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="/vue/vue.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <a class="back" href="javascript:history.go(-1)"><span class="nav_login">订单详情</span></a>
+</nav>
+
+<!-- Message -->
+<div class="full-width-div" style="padding-top: 3rem;">
+    <div class="billBlock">
+        <!-- Film Info   -->
+        <div class="bill">
+            <div class="order_info">
+                <div class="banner bill_chile" th:text="${Infos.sessionInfo.film.film_name}">电影名称</div>
+                <div class="bill_chile" th:text="'放映时间：'+${#dates.format(Infos.sessionInfo.start_time,'MM-dd HH:mm')}">放映时间YYYY-MM-dd HH:mm</div>
+                <div class="bill_chile" th:text="${Infos.sessionInfo.cinema.cinema_name}+' '+${Infos.sessionInfo.room.room_name}">影院 放映厅</div>
+                <div class="bill_chile" th:each="seat:${seats}" th:text="${seat.seat_row}+'排'+${seat.seat_column}+'座 '">座位</div>
+            </div>
+            <img id="film_pic" th:src="@{/get/photo/film/{imgName}(imgName=${Infos.sessionInfo.film.film_pic})}">
+        </div>
+        <div class="box">
+            <div class="line"></div>
+        </div>
+        <!-- QRCode   -->
+        <div class="qrCodeDiv">
+            <div id="codeText">取票码</div>
+            <div class="loader" id="father_img">
+                <img src="" id="codeImg" style="visibility: hidden">
+            </div>
+        </div>
+        <div class="box">
+            <div class="line"></div>
+        </div>
+        <!--  Cinema  -->
+        <div class="bill">
+            <div class="banner bill_chile" th:text="${Infos.sessionInfo.cinema.cinema_name}">影院名称</div>
+            <div class="bill_chile" th:text="'影院地址：'+${Infos.sessionInfo.cinema.cinema_addr}">影院地址</div>
+        </div>
+        <div class="box">
+            <div class="line"></div>
+        </div>
+        <!-- OrderInfo   -->
+        <div class="bill">
+            <div class="banner bill_chile" th:text="${'实付金额：￥'+Infos.total}">实付金额：￥90</div>
+            <div class="bill_chile" th:text="${'订单号：'+Infos.order_id}">订单号</div>
+            <div class="bill_chile" th:text="'购买时间：'+${#dates.format(Infos.create_time,'YYYY-MM-dd HH:mm:ss')}">购买时间</div>
+            <div class="bill_chile" th:text="${'手机号：'+user_phone}">手机号</div>
+        </div>
+        <div class="box">
+            <div class="line"></div>
+        </div>
+        <div class="bill">
+            <div class="banner bill_chile">观影须知</div>
+            <div class="bill_chile">
+                <div class="bill_chile">1. 请提前到达影院现场，找到自助取票机，打印纸质电影票，完成取票。</div>
+                <div class="bill_chile">2. 如现场自助取票机无法打印电影票，请联系影院工作人员处理。</div>
+                <div class="bill_chile">3. 凭打印好的纸质电影票，检票入场观影。</div>
+                <div class="bill_chile">4. 如果订单使用了兑换券，或购买了特殊场次，暂不支持退票和改签。</div>
+                <div class="bill_chile">5. 如有开具所购电影票发票的需求，请保留好电影票根，尽量在观影当天联系影院工作人员进行开具，如遇特殊情况请及时联系客服咨询。</div>
+                <div class="bill_chile">6. 改签、退票服务由影院决定，特殊场次及使用兑换券的场次不支持改签、退票。</div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="line"></div>
+        </div>
+        <div class="bill bill_refund">
+            <div id="refund" v-on:click="toRefund">退款</div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+    window.onload=function(){
+        $("#codeImg").attr("src", "QR/" + [[${Infos.order_id}]]);
+        // $("#codeImg").onload=function(){
+        //     $("#codeImg").removeClass("loader");
+        // };
+        function imgLoad(img, callback) {
+            var timer = setInterval(function() {
+                if (img.complete) {
+                    callback()
+                    clearInterval(timer)
+                }
+            }, 50)
+        }
+        imgLoad(codeImg, function() {
+            $("#father_img").removeClass("loader");
+            document.getElementById("codeImg").style.visibility="visible";
+        })
+    };
+</script>
+<script th:inline="javascript">
+    new Vue({
+        el:"#refund",
+        data(){
+            return{
+                info:{
+                    //返回订单号
+                    orderId: [[${Infos.order_id}]]
+                }
+            }
+        },
+        methods:{
+            toRefund(){
+                window.location.href="/order/refund/"+this.info.orderId;
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

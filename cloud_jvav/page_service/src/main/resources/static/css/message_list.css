@@ -1,0 +1,46 @@
+.message_abstract {
+    padding: 2rem 3.5rem;
+    border-bottom: #e6e6e6 solid .15rem;
+    background: #fefefe;
+    height: 32rem;
+}
+
+.message_abstract2 {
+    margin-top: 2.5rem;
+    padding: 2rem 3.5rem;
+    border-top: #e6e6e6 solid .15rem;
+    border-bottom: #e6e6e6 solid .15rem;
+    background: #fefefe;
+    height: 18rem;
+}
+
+.message_title {
+    margin-top: 10px;
+    text-align: left;
+    color: #333333;
+    font-size: 30pt;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.message_intro {
+    text-align: left;
+    color: #999999;
+    font-size: 25pt;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.msg_right {
+    height: 100%;
+    background: url(../img/ui/right.png) no-repeat center;
+    background-size: 25%;
+    float: right;
+}
+
+.msg{
+    margin:3rem 4rem;
+}

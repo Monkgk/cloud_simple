@@ -1,0 +1,161 @@
+/* All */
+body {
+    background: #f5f5f5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.full-width-div {
+    margin-top: 13.2rem;
+    margin-bottom: 14.7rem;
+    text-align: center;
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+    table-layout: fixed;
+}
+
+/* changepicker */
+.changepicker {
+    border-bottom: #d8d8d8 solid .5px;
+    /* height: 13.2rem;
+    line-height: 13.2rem; */
+    height: 11.5rem;
+    line-height: 11.5rem;
+    background: #fefefe;
+    color: #666666;
+    font-size: 26pt;
+}
+
+.local {
+    font-size: 25pt;
+    padding-left: 3rem;
+    text-align: left;
+}
+
+.local a {
+    color: #666666;
+}
+
+.glyphicon-triangle-bottom {
+    color: #cacaca;
+    font-size: 19pt;
+}
+
+.pages a {
+    padding: 0 4.5rem 3rem 4.5rem;
+    font-weight: bold;
+    color: #666666;
+}
+
+.pages a:visited,
+a:hover,
+a:link {
+    text-decoration: none;
+}
+
+#page1_1 {
+    color: #dd3f3b;
+    border-bottom: #dd3f3b solid 0.5rem;
+}
+
+.search_row {
+    padding: 0px;
+}
+
+.search {
+    /* text-align: center; */
+    /* line-height: 13.2rem; */
+    font-size: 35pt;
+    border-left: #d8d8d8 solid .5px;
+}
+
+.search a {
+    color: #dd3f3b;
+}
+
+/* AppAbstract - page1 */
+.film_abstract {
+    padding: 2rem;
+    border-bottom: #e6e6e6 solid .15rem;
+    background: #fefefe;
+    /* height: 33rem; */
+    height: 29.4rem;
+}
+
+.abstract_img {
+    /* height: 28.8rem; */
+    height: 25.1rem;
+    float: left;
+}
+
+.film_title {
+    text-align: left;
+    color: #222222;
+    font-size: 30pt;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.film_intro {
+    text-align: left;
+    color: #666666;
+    font-size: 25pt;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.film_data {
+    text-align: left;
+    color: #999999;
+    font-size: 25pt;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.film_grade {
+    text-align: right;
+    color: #f3b73f;
+    font-size: 21pt;
+}
+
+#film_score {
+    text-align: right;
+    color: #f3b73f;
+    font-size: 32pt;
+}
+.tab-content{
+    width: 100%;
+    height: 100%;
+}
+.btn-danger {
+    float: right;
+    /*margin-top: 4.3rem;*/
+    padding: 1.4rem 2.8rem;
+    border: none;
+    border-radius: .8rem;
+    font-size: 24pt;
+}
+.search_fail{
+    height: auto;
+    text-align: center;
+}
+.search_fail p{
+    font-size: 4rem;
+    font-weight: bold;
+    color: gainsboro;
+}
+.search_iframe{
+    width: 100%;
+    height: auto;
+
+}
+/*自定义滚动条的伪对象选择器, CSS 可以隐藏滚动条*/
+/*.box::-webkit-scrollbar{
+    display: none;
+}*/
+

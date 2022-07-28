@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CinemaMapper">
+
+	<resultMap type="com.common.Entity.Cinema" id="CinemaResult">
+		<id     property="cinema_id"        column="cinema_id"       />
+		<result property="cinema_name"      column="cinema_name"     />
+		<result property="cinema_addr"      column="cinema_addr"     />
+		<result property="cinema_status"    column="cinema_status"     />
+		<result property="create_time"      column="create_time"     />
+		<result property="update_time"      column="update_time"     />
+	</resultMap>
+	
+	<sql id="selectCinemaVo">
+        select cinema_id,cinema_name,cinema_addr,cinema_status,create_time,update_time
+		from cinema
+    </sql>
+	
+	<select id="selectCinemaList" parameterType="com.common.Entity.Cinema" resultMap="CinemaResult">
+	    <include refid="selectCinemaVo"/>
+		<where>
+			<if test="cinema_status != null and cinema_status != ''">
+				AND cinema_status = #{cinema_status}
+			</if>
+			<if test="cinema_name != null and cinema_name != ''">
+				AND cinema_name like concat('%', #{cinema_name}, '%')
+			</if>
+			<if test="cinema_addr != null and cinema_addr != ''">
+				AND cinema_addr like concat('%',#{cinema_addr},'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectCinemaAll" resultMap="CinemaResult">
+		<include refid="selectCinemaVo"/>
+	</select>
+
+	
+	<select id="selectCinemaById" parameterType="Integer" resultMap="CinemaResult">
+		<include refid="selectCinemaVo"/>
+		where cinema_id = #{cinema_id}
+	</select>
+	
+
+	
+ 	<delete id="deleteCinemaByIds" parameterType="Integer">
+ 		delete from cinema where cinema_id in
+ 		<foreach collection="array" item="cinema_id" open="(" separator="," close=")">
+ 			#{cinema_id}
+        </foreach> 
+ 	</delete>
+
+	<delete id="deleteCinemaById" parameterType="Integer">
+		delete from cinema where cinema_id = #{cinema_id}
+	</delete>
+
+	<select id="selectRoomCountByCinemaId" parameterType="Integer" resultType="int">
+		select count(1) from showroom
+		<where>
+			<if test="cinema_id != null and cinema_id != 0"> and cinema_id = #{cinema_id} </if>
+		</where>
+	</select>
+ 	
+ 	<update id="updateCinema" parameterType="com.common.Entity.Cinema">
+ 		update cinema
+ 		<set>
+ 			<if test="cinema_name != null and cinema_name != ''">cinema_name = #{cinema_name},</if>
+			<if test="cinema_addr != null and cinema_addr != ''">cinema_addr = #{cinema_addr},</if>
+ 			<if test="cinema_status != null and cinema_status != ''">cinema_status = #{cinema_status},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where cinema_id = #{cinema_id}
+	</update>
+ 	
+ 	<insert id="insertCinema" parameterType="com.common.Entity.Cinema" useGeneratedKeys="true" keyProperty="cinema_id">
+ 		insert into cinema(
+			<if test="cinema_name != null and cinema_name != ''">cinema_name,</if>
+			<if test="cinema_addr != null and cinema_addr != ''">cinema_addr,</if>
+			<if test="cinema_status != null and cinema_status != ''">cinema_status,</if>
+ 			create_time
+ 		)values(
+			<if test="cinema_name != null and cinema_name != ''">#{cinema_name},</if>
+			<if test="cinema_addr != null and cinema_addr != ''">#{cinema_addr},</if>
+			<if test="cinema_status != null and cinema_status != ''"> #{cinema_status},</if>
+ 			sysdate()
+ 		)
+	</insert>
+
+</mapper> 

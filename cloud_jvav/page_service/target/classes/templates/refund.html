@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Jvav电影</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/confirm.css">
+    <link rel="stylesheet" href="/css/refund.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="/vue/vue.js"></script>
+    <script src="/axios/axios.min.js"></script>
+</head>
+<body>
+<!-- Banner -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <a class="back" href="javascript:history.go(-1)"><span class="nav_login">退款</span></a>
+</nav>
+
+<div class="full-width-div" id="app">
+    <div class="row">
+        <!-- Abstract -->
+        <div class="col-xs-12 col-sm-12 film_abstract">
+            <p class="film_title" id="film_name" th:text="${Infos.sessionInfo.film.film_name}">我的姐姐</p>
+            <!--					<p class="film_intro" id="#" style="color: #e0594a;">今天04-25 17:35 (原版2D)</p>-->
+            <p class="film_intro" style="color: #e0594a;">[[${#dates.format(Infos.sessionInfo.start_time,'MM-dd
+                HH:mm')}]] ([[${Infos.sessionInfo.film_type}]])</p>
+            <p class="film_intro">
+                <span>[[${Infos.sessionInfo.cinema.cinema_name}]] </span>
+                <span>&nbsp;[[${Infos.sessionInfo.room.room_name}]]</span>
+            </p>
+            <p class="film_intro"><span th:each="seat:${Infos.seatList}"
+                                        th:text="${seat.seat_row}+'排'+${seat.seat_column}+'座 '"></span></p>
+        </div>
+        <div class="col-xs-12 col-sm-12 price_abstract">
+            <div class="col-xs-6 col-sm-6" style="padding: 0;">
+                <p class="price_title">票价</p>
+            </div>
+            <div class="col-xs-6 col-sm-6" style="padding: 0;">
+                <p class="price">
+                    <span class="tips">含服务费3元/张&nbsp;</span>
+                    <span id="total_price" th:text="${Infos.total}">38</span>元
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row ">
+        <div class="cause">退款原因：</div>
+        <!-- textarea -->
+        <div class="col-xs-12 col-sm-12">
+            <textarea v-model="info.reason" id="view" placeholder="在这里写下您的退款原因，让我们下次更好的为您服务" name="comment"></textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Btn -->
+        <div id="submit" class="col-xs-12 col-sm-12">
+            <button type="button" class="btn btn-warning" v-on:click="refund">提交</button>
+        </div>
+    </div>
+</div>
+
+
+<script type="application/javascript" th:inline="javascript">
+    var app = new Vue({
+        el: "#app",
+        data: {
+            info: {
+                //返回订单号
+                orderId: [[${Infos.order_id}]],
+                reason: ""
+            }
+        },
+        methods: {
+            refund() {
+                var $url = "/order/toRefund";
+                var data = this.info;
+                axios.post($url, data,
+                    {
+                        headers: {'Content-Type': 'application/json'}
+                    }).then((response) => {
+                    if (response.data.code == 2000) {
+                        alert("退款成功");
+                        window.location.href = "/mine/order"
+                    } else {
+                        alert("请稍后重试");
+                    }
+                });
+            }
+        }
+    })
+</script>
+</body>
+</html>

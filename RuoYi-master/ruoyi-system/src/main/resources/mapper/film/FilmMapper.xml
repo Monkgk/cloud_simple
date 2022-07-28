@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.FilmMapper">
+
+	<resultMap type="com.common.Entity.Film" id="FilmResult">
+		<id     property="film_id"        column="film_id"       />
+		<result property="film_name"      column="film_name"     />
+		<result property="film_USname"      column="film_USname"     />
+		<result property="film_region"      column="film_region"     />
+		<result property="film_pic"      column="film_pic"     />
+		<result property="introduction"      column="introduction"     />
+		<result property="film_status"      column="film_status"     />
+		<result property="film_show_time"      column="film_show_time"     />
+	</resultMap>
+
+	<sql id="selectFilmVo">
+        select film_id,film_name,film_USname,film_region,film_pic,introduction,film_status,film_show_time
+		from film
+    </sql>
+
+	<select id="selectFilmList" parameterType="com.common.Entity.Film" resultMap="FilmResult">
+	    <include refid="selectFilmVo"/>
+		<where>
+<!--			<if test="film_id != null and film_id != 0">-->
+<!--				AND film_id = #{film_id}-->
+<!--			</if>-->
+			<if test="film_status != null and film_status != ''">
+				AND film_status = #{film_status}
+			</if>
+			<if test="film_name != null and film_name != ''">
+				AND film_name like concat('%', #{film_name}, '%')
+			</if>
+		</where>
+	</select>
+
+	<select id="selectFilmAll" resultMap="FilmResult">
+		<include refid="selectFilmVo"/>
+	</select>
+
+
+	<select id="selectFilmById" parameterType="Integer" resultMap="FilmResult">
+		<include refid="selectFilmVo"/>
+		where film_id = #{film_id}
+	</select>
+
+
+
+ 	<delete id="deleteFilmByIds" parameterType="Integer">
+ 		delete from film where film_id in
+ 		<foreach collection="array" item="film_id" open="(" separator="," close=")">
+ 			#{film_id}
+        </foreach>
+ 	</delete>
+
+ 	<update id="updateFilm" parameterType="com.common.Entity.Film">
+ 		update film
+ 		<set>
+ 			<if test="film_name != null and film_name != ''">film_name = #{film_name},</if>
+			<if test="film_USname != null and film_USname != ''">film_USname = #{film_USname},</if>
+			<if test="introduction != null and introduction != ''">introduction = #{introduction},</if>
+			<if test="film_region != null and film_region != ''">film_region = #{film_region},</if>
+			<if test="film_pic != null and film_pic != ''">film_pic=#{film_pic},</if>
+			<if test="film_show_time != null">film_show_time=#{film_show_time},</if>
+ 			<if test="film_status != null and film_status != ''">film_status = #{film_status},</if>
+ 			update_time = sysdate()
+ 		</set>
+ 		where film_id = #{film_id}
+	</update>
+
+ 	<insert id="insertFilm" parameterType="com.common.Entity.Film" useGeneratedKeys="true" keyProperty="film_id">
+ 		insert into film(
+            <if test="film_name != null and film_name != ''">film_name,</if>
+            <if test="film_USname != null and film_USname != ''">film_USname,</if>
+            <if test="introduction != null and introduction != ''">introduction,</if>
+            <if test="film_region != null and film_region != ''">film_region,</if>
+            <if test="film_pic != null and film_pic != ''">film_pic,</if>
+            <if test="film_show_time != null">film_show_time,</if>
+            <if test="film_status != null and film_status != ''">film_status</if>
+ 		)values(
+            <if test="film_name != null and film_name != ''">#{film_name},</if>
+            <if test="film_USname != null and film_USname != ''">#{film_USname},</if>
+            <if test="introduction != null and introduction != ''">#{introduction},</if>
+            <if test="film_region != null and film_region != ''">#{film_region},</if>
+            <if test="film_pic != null and film_pic != ''">#{film_pic},</if>
+            <if test="film_show_time != null">#{film_show_time},</if>
+            <if test="film_status != null and film_status != ''">#{film_status}</if>
+ 		)
+	</insert>
+
+</mapper> 

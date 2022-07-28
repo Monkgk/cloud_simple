@@ -1,0 +1,193 @@
+/* All */
+body {
+	background: #f5f5f5;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.full-width-div {
+	margin-top: 13.2rem;
+	margin-bottom: 14.7rem;
+	text-align: center;
+}
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+	table-layout: fixed;
+}
+
+.countdown {
+	background: #fcf3db;
+	border-bottom: #d8d8d8 solid .15rem;
+	height: 9.5rem;
+	color: #f09d38;
+	font-size: 27pt;
+	line-height: 9rem;
+}
+
+.film_abstract {
+	padding: 2rem 3.5rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 31rem;
+}
+
+.film_title {
+	text-align: left;
+	color: #000000;
+	font-size: 32pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.film_intro {
+	text-align: left;
+	/* color: #696969; */
+	color: #000000;
+	font-size: 26pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.price_abstract{
+	padding: 0rem 3.5rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 12rem;
+	line-height: 11rem;
+}
+
+.price_title {
+	text-align: left;
+	color: #666666;
+	font-size: 28pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.price {
+	text-align: right;
+	color: #dc5042;
+	font-size: 17pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.price span {
+	font-size: 30pt;
+}
+
+.tips {
+	color: #999999;
+	font-size: 25pt !important;
+}
+
+.noted_abstract {
+	margin-top: 3rem;
+	padding: 0rem 3.5rem;
+	border-top: #e6e6e6 solid .15rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 11rem;
+	line-height: 11rem;
+}
+
+#noted_intro{
+	padding: 2rem 3.5rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 21rem;
+	/* line-height: 11rem; */
+	
+	text-align: left;
+	color: #999999;
+	font-size: 25pt;
+	
+	overflow: hidden;
+}
+
+.down {
+	margin-left: -3.5rem;
+	width: 100%;
+	height: 7rem;
+	
+	background-color: white;
+	background-image: url(../img/ui/down.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	
+	position:absolute;
+	bottom:0
+}
+
+.more {
+	margin-top: 3rem;
+	/* padding: 2rem; */
+	border-top: #e6e6e6 solid .15rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 12rem;
+	line-height: 11rem;
+}
+
+.more_intro {
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 12rem;
+	line-height: 12rem;
+	
+	padding: 0 3.5rem;
+	/* line-height: 11rem; */
+	text-align: left;
+	color: #b5b5b5;
+	font-size: 25pt;
+	
+	overflow: hidden;
+}
+
+.mine_right {
+	height: 100%;
+	background: url(../img/ui/right.png) no-repeat center;
+	background-size: 20%;
+}
+
+.phone_number {
+	text-align: left;
+	color: #000000;
+	font-size: 32pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.confirm_bottom {
+	height: 28.5rem !important;
+}
+
+.privilege_text {
+	padding: 3rem;
+	text-align: left;
+	color: #f3b73f;
+	font-size: 25pt;
+	line-height: 4rem;
+}
+
+.total_price {
+	text-align: right;
+	color: #dc5042;
+	font-size: 25pt;
+}
+
+.btn-warning {
+	margin: 0;
+	background-color: #f09d38;
+	border: #c07e2b solid .15rem;
+	width: 96%;
+	font-size: 32pt;
+	padding: 2rem 0;
+	border-radius: 2rem;
+}

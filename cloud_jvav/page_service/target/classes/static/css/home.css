@@ -1,0 +1,247 @@
+/* All */
+body {
+	background: #f5f5f5;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.full-width-div {
+	margin-top: 13.2rem;
+	margin-bottom: 14.7rem;
+	text-align: center;
+}
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+	table-layout: fixed;
+}
+
+/* changepicker */
+.changepicker {
+	border-bottom: #d8d8d8 solid .5px;
+	/* height: 13.2rem;
+	line-height: 13.2rem; */
+	height: 11.5rem;
+	line-height: 11.5rem;
+	background: #fefefe;
+	color: #666666;
+	font-size: 26pt;
+}
+
+.local {
+	font-size: 25pt;
+	padding-left: 3rem;
+	text-align: left;
+}
+
+.local a {
+	color: #666666;
+}
+
+.glyphicon-triangle-bottom {
+	color: #cacaca;
+	font-size: 19pt;
+}
+
+.pages a {
+	padding: 0 4.5rem 3rem 4.5rem;
+	font-weight: bold;
+	color: #666666;
+}
+
+.pages a:visited,
+a:hover,
+a:link {
+	text-decoration: none;
+}
+
+#page1_1 {
+	color: #dd3f3b;
+	border-bottom: #dd3f3b solid 0.5rem;
+}
+
+.search_row {
+	padding: 0px;
+}
+
+.search {
+	/* text-align: center; */
+	/* line-height: 13.2rem; */
+	font-size: 35pt;
+	border-left: #d8d8d8 solid .5px;
+}
+
+.search a {
+	color: #dd3f3b;
+}
+
+/* AppAbstract - page1 */
+.film_abstract {
+	padding: 2rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	/* height: 33rem; */
+	height: 29.4rem;
+}
+
+.abstract_img {
+	/* height: 28.8rem; */
+	height: 25.1rem;
+	float: left;
+}
+
+.film_title {
+	text-align: left;
+	color: #222222;
+	font-size: 30pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.film_intro {
+	text-align: left;
+	color: #666666;
+	font-size: 25pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.film_data {
+	text-align: left;
+	color: #999999;
+	font-size: 25pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.film_grade {
+	text-align: right;
+	color: #f3b73f;
+	font-size: 21pt;
+}
+
+#film_score {
+	text-align: right;
+	color: #f3b73f;
+	font-size: 32pt;
+}
+
+.btn-danger {
+	float: right;
+	margin-top: 4.3rem;
+	padding: 1.4rem 2.8rem;
+	border: none;
+	border-radius: .8rem;
+	font-size: 24pt;
+}
+
+/* AppAbstract - page2 */
+.page2_frame {
+	background: #fefefe;
+	border-bottom: #e6e6e6 solid .15rem;
+	overflow: hidden;
+	height: 59.5rem;
+}
+
+.hot_recommend_title {
+	text-align: left;
+	padding: 3rem;
+	color: #333333;
+	font-size: 29pt;
+}
+
+.hot_recommend {
+	/* border-bottom: #e6e6e6 solid .15rem; */
+	background: #fefefe;
+	height: 59.5rem;
+	margin: -1rem 0 0 3rem;
+	white-space: nowrap;
+	/*文本不会换行，文本会在在同一行上继续*/
+	overflow-y: auto;
+	/*可滑动*/
+}
+
+/*自定义滚动条的伪对象选择器, CSS 可以隐藏滚动条*/
+/*.box::-webkit-scrollbar{
+    display: none;
+}*/
+.box1 {
+	/* display: block;
+	position: relative; */
+	width: 21.6rem;
+	/* height: 30rem; */
+	height: 30rem;
+	margin-right: 3rem;
+	/* background: tomato; */
+	display: inline-block;
+	/*行内块元素*/
+}
+
+.img_like {
+	position: relative;
+}
+
+.box1 img {
+	max-width: 21.6rem;
+	max-height: 35rem;
+	/* width: auto;
+	height: auto;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translate3d(-50%, -50%, 0);
+	-webkit-transform: translate3d(-50%, -50%, 0); */
+}
+
+.page2_film_title {
+	/* position: relative; */
+	margin-top: .5rem;
+	text-align: left;
+	color: #222222;
+	font-size: 28pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.page2_subtitle {
+	margin-top: -1.5rem;
+	text-align: left;
+	color: #999999;
+	font-size: 23pt;
+}
+
+.page2_like {
+	position: absolute;
+	margin-top: -0.1rem;
+	padding: 1.5rem;
+	background: rgba(166, 166, 159, 0.7);
+	border-radius: 0 0 1rem 0;
+	color: white;
+	font-size: 28pt;
+}
+
+.page2_s2 {
+	margin-top: 3rem;
+}
+
+.page2_data {
+	background: #fefefe;
+	border-top: #e6e6e6 solid .15rem;
+	padding: 3rem 0 0 3rem;
+	text-align: left;
+	color: #222222;
+	font-size: 28pt;
+}
+
+.btn-info {
+	float: right;
+	margin-top: 4.3rem;
+	padding: 1.4rem 2.8rem;
+	border: none;
+	border-radius: .8rem;
+	font-size: 24pt;
+}

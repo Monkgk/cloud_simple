@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/css/rate.css">
+		<link rel="stylesheet" href="/css/nav.css">
+		<link rel="stylesheet" href="/css/star-rating.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script src="/js/star-rating.js" type="text/javascript"></script>
+		<script src="/js/rate.js" type="text/javascript"></script>
+		<script src="/bootstrap-3.3.7-dist/js/bootstrap.js" type="text/javascript"></script>
+		<script src="/layer/layer.js" type="text/javascript"></script>
+<!--		<script src="/vue/vue.js"></script>-->
+<!--		<script src="/axios/axios.min.js"></script>-->
+		<script type="text/javascript" src="/js/getQueryVar.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<a class="back" href="javascript:history.go(-1)"><span class="nav_login">评分</span></a>
+		</nav>
+
+		<!-- Rating -->
+		<div class="full-width-div" >
+			<form id="comment" method="post" th:action="${#httpServletRequest.requestURL}">
+				<!--hidden-->
+				<input name="loginId" type="hidden" th:each="user:${session.loginUser}" th:value="${user.user_id}">
+				<p th:each="user:${session.loginUser}" th:value="${user.user_id}"></p>
+				<div class="row">
+					<!-- score -->
+					<div class="col-xs-12 col-sm-12 rate">
+						<p class="score">分</p>
+						<p id="remark" class="remark">请滑动星星评分</p>
+						<input id="input-21b" value="1" type="text" data-size="sm"  class="rating"  title="" name="grade" required>
+					</div>
+
+					<!-- textarea -->
+					<div class="col-xs-12 col-sm-12">
+						<textarea id="view" placeholder="快来说说你的看法吧（6-300个字）" onpropertychange="postbtn()" oninput="postbtn()" name="comment"></textarea>
+					</div>
+
+					<!-- btn -->
+					<div class="col-xs-12 col-sm-12">
+						<input id="post" class="btn btn-warning" type="submit" value="提交" disabled>
+					</div>
+				</div>
+			</form>
+
+		</div>
+		<script>
+			var $inp = $('#input-21b');
+			$inp.rating({
+				min: 1,
+				max: 10,
+				step: 1,
+				size: 'sm',
+				showClear: false,
+			});
+		</script>
+		<script>
+			$(function(){
+				function getAction() {
+					var url = window.location.href+"/toComment";
+					$("#comment").attr("action", url);
+				}
+				getAction();
+			})
+		</script>
+	</body>
+</html>

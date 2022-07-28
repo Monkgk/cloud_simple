@@ -1,0 +1,97 @@
+#order_frame {
+	padding: 0;
+}
+
+#order_frame a:hover,
+#order_frame a:visited,
+#order_frame a:focus {
+	text-decoration: none;
+}
+
+.cinema_abstract {
+	margin-top: 3rem;
+	padding: 2rem 3.5rem;
+	border-top: #e6e6e6 solid .15rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 9.2rem;
+}
+
+.cinema_title {
+	text-align: left;
+	color: #888888;
+	font-size: 26pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.cinema_icon {
+	position: absolute;
+	margin-top: 5.7rem;
+}
+
+.film_abstract {
+	padding: 2rem 3.5rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 28rem;
+}
+
+.abstract_img {
+	float: left;
+	margin-left: -1.2rem;
+	height: 23.7rem;
+}
+
+.detail {
+	margin-top: 4rem;
+	padding: 0;
+}
+
+.film_title {
+	text-align: left;
+	color: #000000;
+	font-size: 28pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.film_intro {
+	text-align: left;
+	color: #888888;
+	font-size: 23pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.price_abstract {
+	padding: 2rem 3.5rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 9.2rem;
+}
+
+.order_bottom {
+	padding: 0;
+}
+
+.order_price {
+	text-align: left;
+	color: #888888;
+	font-size: 26pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.order_statement{
+	text-align: right;
+	color: #888888;
+	font-size: 26pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

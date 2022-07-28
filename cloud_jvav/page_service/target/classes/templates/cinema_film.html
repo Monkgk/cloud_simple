@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>JVAV电影</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/search_film.css">
+    <link rel="stylesheet" href="/css/cinema2.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="/vue/vue.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <a class="back" href="javascript:history.go(-1)"><span class="nav_login">JVAV电影</span></a>
+</nav>
+
+<!-- Cinema_Film -->
+<div id="app" class="full-width-div">
+    <!-- Control center -->
+    <div class="row cinema_top">
+        <!-- Search -->
+        <div class="col-xs-10 col-sm-10 pages" style="width: 100%;height: 100%;">
+<!--            <a href="#" >-->
+                <div class="cinema_search" style="height: 100%;padding: 1.6rem 1.6rem 0">
+                    <span class="glyphicon glyphicon-search cinema_search_click" style="float: left;border-radius: 18px;border: 1px solid #ccc;width: 100%;height: 80%;margin: 0 auto"/>
+                    <input type="text" v-model="search_like" placeholder="找电影" @keyup.enter="toSearchFilm" style="border:none;width: 90%;height: 100%;padding: 2px"/>
+                </div>
+<!--            </a>-->
+
+        </div>
+    </div>
+    <div class="col-sm-12 col-xs-12" style="padding: 0; height: auto;">
+        <!-- Flim Name -->
+        <iframe  class="search_iframe" id="search_iframe" v-bind:src="iframe_url" align="center" onload="iFrameHeight()"
+                 scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+    </div>
+
+</div>
+<script th:inline="javascript">
+    function toDetail(film_id) {
+        window.location.href=window.location.href+"/"+film_id;
+    }
+</script>
+<script>
+    function iFrameHeight(){undefined
+        var ifm= document.getElementById("search_iframe");
+        var subWeb = document.frames ? document.frames["search_iframe"].document :    ifm.contentDocument;
+        if(ifm != null && subWeb != null) {undefined
+            $("#search_iframe").height(0);//此处关键处 莫忘  清除上一个子页面高度的影响
+            $("#search_iframe").height(subWeb.body.scrollHeight);
+            //ifm.height = subWeb.body.scrollHeight;
+        }
+    }
+</script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            search_like:"",
+            iframe_url:"/cinema/film/search"
+        },
+        methods:{
+            toSearchFilm(){
+                if (this.search_like!=""){
+                    this.iframe_url="/cinema/film/search/"+this.search_like;
+                }else{
+                    this.iframe_url="/cinema/film/search";
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

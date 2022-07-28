@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="/css/seat.css">
+		<link rel="stylesheet" href="/css/jq22.css">
+		<link rel="stylesheet" href="/css/nav.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="/js/mine.js"></script>
+		<script type="text/javascript" src="/js/vip.js"></script>
+		<script src="/vue/vue.js"></script>
+		<script src="/axios/axios.min.js"></script>
+		<script type="text/javascript" src="/js/input_disable.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<a class="back" href="javascript:history.go(-1)"><span class="nav_login" id="film_name" th:text="${sessionInfo.film.film_name}">我的姐姐</span></a>
+		</nav>
+
+		<!-- Data -->
+		<div class="full-width-div">
+			<div class="row" >
+				<!-- top -->
+				<div class="col-xs-12 col-sm-12 flim_abstract">
+					<p th:text="${sessionInfo.film.film_name}" class="flim_title">我的姐姐</p>
+					<p class="flim_intro">
+						<span th:text="${#dates.format(sessionInfo.start_time,'MM月dd日')}" id="data">今天&nbsp;4月25日</span>&nbsp;
+						<span th:text="${#dates.format(sessionInfo.start_time,'HH:mm')}" id="time">12:45</span>&nbsp;
+						<span th:text="${sessionInfo.film_type}" id="language">国语2D</span>
+					</p>
+					<p class="warn">
+						<img src="/img/ui/broadcast.png">
+						观影需全程佩戴口罩，电影放映期间影厅内禁止饮食，感谢配合。
+					</p>
+				</div>
+
+				<!-- movie hall -->
+				<div class="col-xs-12 col-sm-12 hall_abstract"></div>
+				<p th:text="${sessionInfo.room.room_name}" class="col-xs-12 col-sm-12 hall">6号厅&nbsp;激光厅</p>
+
+				<!-- seat -->
+				<div class="col-xs-12 col-sm-12 seating_chart">
+					<p class="front">银幕中央</p>
+					<div class="staff_list">
+						<div class="box1">
+							<div class="demo clearfix">
+								<!---座位列表----->
+								<div id="seat_area"></div>
+							</div>
+							<!-- <script src="http://www.jq22.com/jquery/1.9.1/jquery.min.js"></script> -->
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+		<!-- Navigation bar -->
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 seating_chart2">
+					<!-- <div id="legend"></div> -->
+					<p class="seat_title">已选座位</p>
+					<div class="staff_list2">
+						<div class="box1">
+							<ul id="seats_chose" class="info_summit"></ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12" id="summit">
+					<button type="button" class="btn btn-warning post"  v-on:click="seat_confirm"  disabled>
+						￥<span id="total_price">0</span>&nbsp;确认选座
+					</button>
+
+					<!-- <input type="button" class="btn" value="确定购买" /> -->
+					
+				</div>
+			</div>
+		</nav>
+		<script type="text/javascript" src="/js/jquery.seat-charts.min.js"></script>
+
+		<script type="text/javascript"  th:inline="javascript">
+			var price = [[${sessionInfo.price}]]; //电影票价
+			var seat_selected=new Map();//已选座位
+			$(document).ready(function() {
+				var $cart = $('#seats_chose'), //座位区
+						$tickects_num = $('#tickects_num'), //票数
+						$total_price = $('#total_price');//票价总额
+				var sc = $('#seat_area').seatCharts({
+					map: [ //座位结构图 a 代表座位; 下划线 "_" 代表过道
+						'cccccccccc',
+						'cccccccccc',
+						'__________',
+						'cccccccc__',
+						'cccccccccc',
+						'cccccccccc',
+						'cccccccccc',
+						'cccccccccc',
+						'cccccccccc',
+						'cc__cc__cc'
+					],
+					naming: { //设置行列等信息
+						top: false, //不显示顶部横坐标（行）
+						getLabel: function(character, row, column) { //返回座位信息
+							return column;
+						}
+					},
+					legend: { //定义图例
+						node: $('#legend'),
+						items: [
+							['c', 'available', '可选座'],
+							['c', 'unavailable', '已售出']
+						]
+					},
+					click: function() {
+						if (this.status() == 'available') { //若为可选座状态，添加座位
+							$('<li>' + (this.settings.row + 1) + '排' + this.settings.label + '座</li>')
+									.attr('id', 'cart-item-' + this.settings.id)
+									.data('seatId', this.settings.id)
+									.appendTo($cart);
+							postbtn_seat();
+							$tickects_num.text(sc.find('selected').length + 1); //统计选票数量
+							$total_price.text(getTotalPrice(sc) + price); //计算票价总金额
+							seat_selected[this.settings.id]=[this.settings.row + 1,this.settings.label];//存放已选座位
+							return 'selected';
+						} else if (this.status() == 'selected') { //若为选中状态
+							$tickects_num.text(sc.find('selected').length - 1); //更新票数量
+							$total_price.text(getTotalPrice(sc) - price); //更新票价总金额
+							$('#cart-item-' + this.settings.id).remove(); //删除已预订座位
+							postbtn_seat();
+							delete seat_selected[this.settings.id];//删除已选座位
+							return 'available';
+						} else if (this.status() == 'unavailable') { //若为已售出状态
+							return 'unavailable';
+						} else {
+							return this.style();
+						}
+					}
+				});
+				//设置已售出的座位
+				sc.get([[${seatSelecteds}]]).status('unavailable');
+			});
+
+			function getTotalPrice(sc) { //计算票价总额
+				var total = 0;
+				sc.find('selected').each(function() {
+					total += price;
+				});
+				return total;
+			};
+
+		</script>
+		<script>
+			var $url="/order/toOrder";
+			new Vue({
+				el: "#summit",
+				data() {
+					return {
+						Info:{
+							selected: seat_selected,
+							sessionId:[[${sessionInfo.session_id}]]
+						}
+					}
+				},
+				methods: {
+					seat_confirm() {
+						var data = this.Info;
+						axios.post($url, data,
+								{
+									headers: {'Content-Type': 'application/json'}
+								})
+								.then((response) => {
+									if (response.data.code == 2000) {
+										window.location.href="/order/confirm";
+									} else if (response.data.code == 1004){
+										alert("您还有未处理订单");
+										window.location.href="/order/confirm";
+									}else{
+										alert(response.data.msg);
+									}
+								})
+								.catch(function (error) {
+									console.log(error);
+								});
+					},
+					toconfirm() {
+						var confirmurl = "/order/confirm";
+						axios.get($confirmurl, null,
+								{
+									headers: {'Content-Type': 'application/json'}
+								})
+								.then((response) => {
+									if (response.data.code == 2000) {
+
+									} else {
+										alert(response.data.msg)
+									}
+								})
+								.catch(function (error) {
+									console.log(error);
+								});
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

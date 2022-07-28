@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>JVAV电影</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/message_list.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="/vue/vue.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <a class="back" href="javascript:history.go(-1)"><span class="nav_login">[[${message_type}]]</span></a>
+</nav>
+
+<!-- Message -->
+<div class="full-width-div" style="padding-top: 3rem">
+    <div class="row msg" th:if="${messageList.size()}" th:each="message:${messageList}">
+        <span style="font-size: 3rem" th:text="${#dates.format(message.create_time,'MM-dd HH:mm')}"></span>
+        <!-- System -->
+<!--        <a th:href="@{'message/detail/'+${message.order_id}}">-->
+            <div class="col-xs-12 col-sm-12 message_abstract">
+                <div class="col-xs-9 col-sm-11">
+                    <p class="message_title" th:text="${message.msg_title}">系统通知</p>
+                    <h5 class="page-header" style="margin-top: 20px"></h5>
+                    <p class="message_intro" th:utext="${message.msg_content}">还没有系统通知哦</p>
+                </div>
+<!--                <div class="col-xs-1 col-sm-1 msg_right"></div>-->
+            </div>
+<!--        </a>-->
+    </div>
+    <span th:unless="${messageList.size()}" style="font-size: 3rem;color:#A9A9A9">暂无消息</span>
+</div>
+<script >
+    var type=[[${message_type_id}]]
+    localStorage.removeItem(type);
+</script>
+
+</body>
+</html>

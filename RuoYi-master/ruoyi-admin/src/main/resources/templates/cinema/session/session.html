@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('场次列表')"/>
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="showroom-form">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            影院名称：<input type="text" name="cinema_name"/>
+                        </li>
+                        <li>
+                            影片名称：<input type="text" name="film_name"/>
+                        </li>
+                        <li>
+                            场次状态：<select name="room_status" th:with="type=${@dict.getType('session_status')}">
+                            <option value="">所有</option>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}"
+                                    th:value="${dict.dictValue}"></option>
+                        </select>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+                                    class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+                                    class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+        <div class="btn-group-sm" id="toolbar" role="group">
+            <a class="btn btn-success" onclick="$.operate.add(1)" shiro:hasPermission="cinema:session:add">
+                <i class="fa fa-plus"></i> 新增
+            </a>
+            <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="cinema:session:edit">
+                <i class="fa fa-edit"></i> 修改
+            </a>
+            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
+               shiro:hasPermission="cinema:session:remove">
+                <i class="fa fa-remove"></i> 删除
+            </a>
+        </div>
+
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer"/>
+<script th:inline="javascript">
+    var addFlag = [[${@permission.hasPermi('cinema:session:add')}]];
+    var editFlag = [[${@permission.hasPermi('cinema:session:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('cinema:session:remove')}]];
+    var datas = [[${@dict.getType('session_status')}]];
+    var prefix = ctx + "cinema/session";
+
+    $(function () {
+        var options = {
+            code: "session_id",
+            parentCode: "room_id",
+            uniqueId: "session_id",
+            url: prefix + "/list",
+            createUrl: prefix + "/add/{id}",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            sortName: "session_id",
+            modalName: "场次",
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field: 'session_id',
+                    title: '场次编号',
+                    sortable: true
+                },
+                {
+                    field: 'film.film_name',
+                    title: '影片名称'
+                },
+                {
+                    field: 'cinema.cinema_name',
+                    title: '影院名称'
+                },
+                {
+                    field: 'room.room_name',
+                    title: '放映厅名称'
+                },
+                {
+                    field: 'session_status',
+                    title: '状态',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
+                },
+                {
+                    field: 'start_time',
+                    title: '放映时间',
+                    sortable: true
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.session_id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-info  btn-xs ' + addFlag + '" href="javascript:void(0)" onclick="$.operate.add(\'' + row.session_id + '\')"><i class="fa fa-plus"></i>新增</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.session_id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    });
+</script>
+</body>
+</html>

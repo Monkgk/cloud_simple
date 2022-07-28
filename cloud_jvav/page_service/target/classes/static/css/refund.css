@@ -1,0 +1,29 @@
+.row{
+    margin-bottom: 1rem;
+    height: auto;
+}
+.cause{
+    font-weight:bold;
+    font-size: 5rem;
+    text-align: left;
+    color: black;
+    margin: 0 auto;
+    width: 90%;
+}
+textarea {
+    margin-top: 1rem;
+    padding: 3rem;
+    font-size: 28pt;
+    width: 90%;
+    height: 26rem;
+    border: #d8d8d8 solid .2rem;
+    border-radius: 1rem;
+    resize: none;
+    -webkit-user-select: auto;
+    outline: none;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    -webkit-appearance: none;
+}
+#submit {
+    padding-top: 2rem;
+}

@@ -1,0 +1,287 @@
+/* modal */
+.modal-dialog {
+	width: 90%;
+}
+
+.modal-content {
+	border-radius: 2rem;
+	box-shadow: none;
+}
+
+.modal-header {
+	border-bottom: none;
+}
+
+.modal-title {
+	font-size: 35pt;
+	padding: 3rem 0;
+}
+
+.close {
+	line-height: 5rem;
+	font-size: 45pt;
+}
+
+.modal-body {
+	padding: 1rem 8rem;
+	text-align: left;
+	font-size: 23pt;
+}
+
+.modal-body p {
+	margin-bottom: 3rem;
+}
+
+
+/* other */
+.col-xs-12,
+.col-sm-12 {
+	padding: 0;
+}
+
+.vip_abstract {
+	padding: 4.5rem 3.5rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 80rem;
+}
+
+.card_top {
+	margin: 0 auto;
+	width: 78rem;
+	height: 26rem;
+	background: #bc3e37;
+	border-radius: 3rem 3rem 0 0;
+}
+
+.card_bottom {
+	margin: 0 auto;
+	margin-top: -1px;
+	width: 78rem;
+	height: 10rem;
+	background: #ae3833;
+	border-radius: 0 0 3rem 3rem;
+}
+
+.card_recommend {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: url(../img/ui/recommend.png) no-repeat right;
+	background-size: 10%;
+}
+
+.tag {
+	position: absolute;
+	width: 16%;
+	padding: .3rem;
+	margin-left: 600px;
+	background: #a3423b;
+	color: #edd9d8;
+	font-size: 23pt;
+}
+
+.card_logo {
+	height: 100%;
+	background: url(../img/ui/vip_icon.png) no-repeat right;
+	background-size: 25%;
+}
+
+.card_title {
+	margin-top: 70px;
+	text-align: left;
+	color: #ffffff;
+	font-size: 34pt;
+}
+
+.card_subtitle {
+	text-align: left;
+	margin-top: -10px;
+	color: #f3d8d8;
+	font-size: 24pt;
+}
+
+.help_click {
+	margin-left: 1rem;
+}
+
+.vip_help {
+	float: left;
+	padding-left: 1rem;
+	line-height: 10rem;
+	font-size: 25pt;
+	color: #d7b1af;
+}
+
+.vip_price {
+	float: right;
+	padding-right: 1rem;
+	line-height: 10rem;
+	font-size: 25pt;
+	color: #fefefe;
+}
+
+.quarter_margin {
+	margin-top: 2rem;
+}
+
+.quarter {
+	margin: 0 auto;
+	margin-top: 4.5rem;
+	margin-bottom: 4rem;
+	width: 95%;
+	height: 22rem;
+	border: #f2dfc9 solid .2rem;
+	border-radius: 2rem;
+}
+
+.quarter_choice {
+	margin: 0 auto;
+	margin-top: 4.5rem;
+	margin-bottom: 4rem;
+	width: 95%;
+	height: 22rem;
+	border: #f2dfc9 solid .2rem;
+	border-radius: 2rem;
+	background: #fdf5ee;
+}
+
+.quarter_intro {
+	font-size: 24pt;
+	color: #906031;
+}
+
+.quarter_intro span {
+	font-size: 50pt;
+	color: #906031;
+}
+
+/* choice */
+.cur i {
+	display: block;
+	position: absolute;
+	border: 3rem solid #906031;
+	border-top-color: transparent;
+	border-left-color: transparent;
+	/* border-bottom: 8rem solid #906031;*/
+	border-radius: 0 0 2rem 0;
+	width: 0px;
+	height: 0px;
+	bottom: 4rem;
+	right: 2.6rem;
+}
+
+.cur i:after {
+	position: absolute;
+	content: '\2713';
+	color: #FFFFFF;
+	/* right: .5rem;
+	top: 2.5rem; */
+	left: -.5rem;
+	top: -.5em;
+	font-size: 4rem;
+	font-weight: bold;
+}
+
+.card_warn {
+	color: #9c9c9c;
+	font-size: 24pt;
+}
+
+/* discount */
+.discount_abstract {
+	margin-top: 3rem;
+	padding: 4.5rem 3.5rem;
+	border-top: #e6e6e6 solid .15rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 48rem;
+}
+
+.header {
+	margin-top: 2rem;
+	margin-bottom: 5rem;
+	font-size: 30pt;
+}
+
+.header2 {
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+	font-size: 30pt;
+}
+
+.line {
+	display: inline-block;
+	margin: 0 2rem;
+	width: 8rem;
+	border-top: 2px solid #cccccc;
+	vertical-align: 10pt;
+}
+
+.discount_img {
+	height: 100%;
+	background: url(../img/ui/favourable.png) no-repeat top center;
+	background-size: 50%;
+}
+
+.discount_title {
+	text-align: left;
+	font-size: 27pt;
+	color: #333333;
+}
+
+.discount_subtitle {
+	margin-top: -.5rem;
+	text-align: left;
+	font-size: 24pt;
+	color: #999999;
+}
+
+/* cinema */
+.cinema_abstract {
+	margin-top: 3rem;
+	padding: 4.5rem 3.5rem;
+	border-top: #e6e6e6 solid .15rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 25rem;
+}
+
+.cinema_img {
+	position: absolute;
+	margin-top: .4rem;
+	margin-left: 300px;
+	width: 10%;
+	height: 15%;
+	background: url(../img/ui/local.png) no-repeat center;
+	background-size: 30%;
+}
+
+.cinema_subtitle {
+	margin-left: 40px;
+	font-size: 24pt;
+	color: #999999;
+}
+
+/* clause */
+.clause_abstract {
+	margin-top: 3rem;
+	padding: 4.5rem 3.5rem;
+	border-top: #e6e6e6 solid .15rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 15rem;
+}
+
+.clause_subtitle {
+	line-height: 6rem;
+	font-size: 24pt;
+	color: #999999;
+}
+
+.btn-warning {
+	width: 95%;
+	font-size: 32pt;
+	padding: 2rem 0;
+	border-radius: 2rem;
+}

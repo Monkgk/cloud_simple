@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="/css/home.css">
+		<link rel="stylesheet" href="/css/message.css">
+		<link rel="stylesheet" href="/css/nav.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script src="/vue/vue.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<span>消息中心</span>
+		</nav>
+
+		<!-- Message -->
+		<div class="full-width-div">
+			<div class="row" th:each="type:${typeList}">
+				<!-- System -->
+				<a th:href="@{'message/'+${type.msg_type_id}+'/list'}">
+					<div class="col-xs-12 col-sm-12 message_abstract">
+						<div class="col-xs-2 col-sm-2 "
+							 th:classappend="|${type.msg_type_id==1?'msg_system':''} ${type.msg_type_id==2?'msg_vip':''} ${type.msg_type_id==3?'msg_welfare':''} ${type.msg_type_id==4?'msg_other':' '''''}|"></div>
+<!--						"|${x.isTrue ？'class1' ： ''} ${y.isTrue ？@ ： @''}|"-->
+						<div class="col-xs-9 col-sm-9">
+							<p class="message_title" th:text="${type.msg_type}">系统通知</p>
+							<p class="message_intro" th:id="${'message_'+type.msg_type_id}">还没有消息哦</p>
+						</div>
+						<div class="col-xs-1 col-sm-1 msg_right"></div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<!-- Navigation bar -->
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+			<div class="row">
+				<div class="col-xs-3 col-sm-3">
+					<a href="/index">
+						<span class="glyphicon glyphicon-film">
+							<p>电影</p>
+						</span>
+					</a>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<a href="/cinema">
+						<span class="glyphicon glyphicon-blackboard">
+							<p>影院</p>
+						</span>
+					</a>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<a href="/message" class="nav_action">
+						<span class="glyphicon glyphicon-bell">
+							<p>消息</p>
+						</span>
+					</a>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<a href="/mine">
+						<span class="glyphicon glyphicon-user">
+							<p>我的</p>
+						</span>
+					</a>
+				</div>
+			</div>
+		</nav>
+	<script>
+		function getCookie(cname)
+		{
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0; i<ca.length; i++)
+			{
+				var c = ca[i].trim();
+				if (c.indexOf(name)==0) return true;
+			}
+			return false;
+		};
+		if(getCookie("token")){
+			var websocket = null;
+			if('WebSocket' in window){
+				websocket = new WebSocket("ws://gqpweb.natapp1.cc/webSocket");
+			}else{
+				alert("该浏览器不支持websocket！");
+			}
+			websocket.onopen = function (event) {
+				console.log('建立连接');
+			}
+			websocket.onclose = function (event) {
+				console.log('连接关闭');
+			}
+			websocket.onmessage = function (event){
+				var data=event.data.split("|")
+				var type=data[0];
+				var num=data[1];
+				if(localStorage.getItem(type)==null){
+					localStorage.setItem(type,num);
+				}else{
+					localStorage.setItem(type,num+localStorage.getItem(type));
+				}
+				console.log('收到消息：'+event.data);
+			}
+			websocket.onerror = function () {
+				alert('websocket通信发生错误！');
+			}
+			websocket.onbeforeunload = function (){
+				websocket.close();
+			}
+		}
+	</script>
+	<script>
+		if (localStorage.getItem("1")!=null){
+			$("#message_1").text("有"+localStorage.getItem("1")+"条未读消息");
+		}
+		if (localStorage.getItem("2")!=null){
+			$("#message_2").text("有"+localStorage.getItem("2")+"条未读消息");
+		}
+		if (localStorage.getItem("3")!=null){
+			$("#message_3").text("有"+localStorage.getItem("3")+"条未读消息");
+		}
+		if (localStorage.getItem("4")!=null){
+			$("#message_4").text("有"+localStorage.getItem("4")+"条未读消息");
+		}
+	</script>
+	</body>
+</html>

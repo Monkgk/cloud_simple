@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>JVAV电影</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/mine.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/info.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/input_disable.js"></script>
+    <script src="/vue/vue.js"></script>
+    <script src="/axios/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <!-- Banner -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <a class="back" href="javascript:history.go(-1)">
+            <span class="nav_login" th:text="${'设置'+type}">这里填修改内容的标题</span>
+        </a>
+        <button th:unless="${url} eq 'head'" class="btn change_save post" type="button" v-on:click="toChange" disabled>保存</button>
+    </nav>
+
+    <div class="full-width-div">
+
+        <div th:if="${url} eq 'head'" class="change_body">
+            <div class="info_head">
+                <!--显示头像-->
+                <img class="info_head_body" th:src="@{/user/get/head/{imgName}(imgName=${user_info.user_head})}">
+                <!--设置头像-->
+                <input id="changeVal"  class="info_summit change_head_input" type="file" accept="image/gif, image/jpeg, image/png, image/jpg"  onpropertychange="postbtn()" oninput="postbtn()">
+                <button  class="btn change_head_save post" type="button" v-on:click="toChangeHead" disabled>上传</button>
+            </div>
+        </div>
+
+        <div th:if="${url} eq 'name'" class="change_body">
+            <!--设置用户名-->
+            <input v-model="info.value" class="info_summit change_input" type="text" placeholder="请输入新的用户名" onpropertychange="postbtn()" oninput="postbtn()">
+        </div>
+
+        <div th:if="${url} eq 'sex'" class="change_body">
+            <!--设置性别-->
+            <div class="divInput">
+                <div class="input" v-on:click="openValue">
+                    <input id="changeVal" class="info_summit arrow_down" v-model="sex_name" type="text" placeholder="请选择" onpropertychange="postbtn()" oninput="postbtn()">
+<!--                        <img id="arrow-down" src="/img/ui/arrow-down.png" alt="">-->
+                </div>
+                <div class="list" v-show="show">
+                    <ul>
+                        <li class="change_input" v-on:click="getvalue(index,item)" v-for="(item,index) in tableData" v-bind:key="item.index" v-text="item.name"></li>
+                    </ul>
+                </div>
+            </div>
+            <!--            <input id="changeVal" class="info_summit change_input" type="text" placeholder="内容" onpropertychange="postbtn()" oninput="postbtn()">-->
+        </div>
+
+        <div th:if="${url} eq 'pwd'" class="change_body">
+            <!--设置密码-->
+            <input id="oldPwd" v-model="info.oldPwd" class="info_summit change_input" type="password" placeholder="请输入旧密码" v-on:input="confirmPwd">
+            <input id="newPwd" v-model="first_newPwd" class="info_summit change_input" type="password" placeholder="请输入新密码" v-on:input="confirmPwd">
+            <input id="renewPwd"  v-model="second_newPwd" class="info_summit change_input" type="password" placeholder="再次输入新密码" v-on:input="confirmPwd">
+            <span class="tip_text" v-show="show_tip">两次密码不相同</span>
+        </div>
+    </div>
+</div>
+
+<script type="application/javascript" th:inline="javascript">
+    new Vue({
+        el:"#app",
+        data(){
+            return{
+                url:"/mine/info/set/"+[[${url}]],
+                first_newPwd:"",
+                second_newPwd:"",
+                sex_name:"",
+                info:{
+                    value:"",
+                    oldPwd:$("#oldPwd").val(),
+                    newPwd:"",
+                    file:""
+                },
+                tableData:[
+                    {
+                        'name':"男",
+                        'value':1
+                    },
+                    {
+                        'name':"女",
+                        'value':0
+                    }
+                ],
+                show:false,
+                show_tip:false,
+                value:""
+            }
+        },
+        methods:{
+            toChange(){
+                var $url = this.url;
+                var data = this.info;
+                console.log(data);
+                axios.post($url,data,
+                    {
+                        headers: {'Content-Type': 'application/json'}
+                    })
+                    .then((response)=>{
+                        console.log(response);
+                        if (response.data.code==2000){
+                            alert(response.data.msg);
+                            window.location.href="/mine/info";
+                        }else{
+                            alert(response.data.msg);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            toChangeHead(){
+                var formData = new window.FormData();
+
+                var file = $("#changeVal")[0];
+
+                formData.append('file',file.files[0]);
+                console.log(file.files[0]);
+
+                var $url = "/mine/info/load/head";
+                // this.info.file = formData;
+                // var data = this.info;
+
+                axios.post($url,formData,
+                    {
+                        headers: {'Content-Type': 'multipart/form-data'}
+                    })
+                    .then((response)=>{
+                        console.log(response);
+                        if (response.data.code==2000){
+                            alert(response.data.msg);
+                            window.location.href="/mine/info";
+                        }else{
+                            alert(response.data.msg);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            openValue(){
+                this.show=!this.show;
+            },
+            getvalue(index,item){
+                this.sex_name=item.name;
+                this.info.value=item.value.toString();
+                $("#changeVal").val(item.value);
+                postbtn();
+                this.show=false;
+            },
+            confirmPwd(){
+                if (this.first_newPwd==this.second_newPwd){
+                    this.info.newPwd = this.second_newPwd;
+                    console.log(this.info.newPwd);
+                    this.show_tip=false;
+                    postbtn();
+                }else{
+                    this.show_tip=true;
+                    document.getElementsByClassName("post")[0].disabled = true;
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

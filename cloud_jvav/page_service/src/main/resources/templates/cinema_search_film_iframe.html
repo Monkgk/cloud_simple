@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>JVAV电影</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/search_film.css">
+    <link rel="stylesheet" href="/css/cinema2.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/changepicker.js"></script>
+    <script type="text/javascript" src="/vue/vue.js"></script>
+    <script type="text/javascript" src="/axios/axios.min.js"></script>
+</head>
+<body>
+
+<div id="myTabContent" class="tab-content">
+    <div class=" search_fail" th:if="${#lists.isEmpty(films)}">
+        <p>搜索无结果</p>
+    </div>
+    <!-- page1 -->
+    <div  th:unless="${#lists.isEmpty(films)}">
+        <div th:each="film:${films}" class="row">
+            <!-- e.g.1 -->
+            <div class="col-xs-12 col-sm-12 film_abstract">
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3">
+                        <!--									<img class="abstract_img" id="abstract_pic" th:src="${film.film_pic}">-->
+                        <img class="abstract_img" id="abstract_pic" th:src="@{/get/photo/film/{imgName}(imgName=${film.film_pic})}">
+                    </div>
+                    <div class="col-xs-7 col-sm-7">
+                        <p th:text="${film.film_name}" class="film_title"></p>
+                        <p th:text="${film.film_desc}" class="film_intro"></p>
+                        <p th:text="'主演:'+${film.actor_toghter}" class="film_intro"></p>
+                        <p class="film_data">今天<span id="cinema_count">251</span>家影院放映<span
+                                id="show_count">2987</span>场</p>
+                    </div>
+                    <div class="col-xs-2 col-sm-2">
+                        <p class="film_grade"><span id="film_score">8.9</span>分</p>
+                        <button type="button" class="btn btn-danger" th:onclick="cinema_iframe_film_detail([[${film.film_id}]])">购票</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+
+        window.parent.iFrameHeight();
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="/css/home.css">
+		<link rel="stylesheet" href="/css/nav.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script src="/vue/vue.js"></script>
+		<script src="/axios/axios.min.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<span id="title_my">JVAV电影</span>
+		</nav>
+
+		<!-- Home -->
+		<div class="full-width-div">
+			<!-- Control center -->
+			<div class="row changepicker">
+				<!-- Local -->
+				<div class="col-xs-3 col-sm-3 local">
+<!--					<a href="#">-->
+<!--						<span id="location">深圳</span>&nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span>-->
+<!--					</a>-->
+				</div>
+				<!-- Pages -->
+				<div class="col-xs-6 col-sm-6 pages" id="myTab">
+					<!-- Page1: film show -->
+					<a href="#page1" id="page1_1" data-toggle="tab" class="shift">热映</a>
+					<!-- Page2: to be shown -->
+<!--					<a href="#page2" id="page2_1" data-toggle="tab" class="shift">待映</a>-->
+				</div>
+				<script type="text/javascript" src="/js/changepicker.js"></script>
+				<!-- Search -->
+				<div class="col-xs-3 col-sm-3 search_row">
+					<div class="row">
+						<div class="col-xs-offset-6 col-md-offset-6 search">
+							<a href="/index/search">
+								<span class="glyphicon glyphicon-search"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- App Abstract -->
+			<div id="myTabContent" class="tab-content">
+				<!-- page1 -->
+				<div class="tab-pane fade in active" id="page1">
+					<div th:each="film:${films}" class="row">
+						<!-- e.g.1 -->
+						<div class="col-xs-12 col-sm-12 film_abstract">
+							<div class="row">
+								<div class="col-xs-3 col-sm-3">
+<!--									<img class="abstract_img" id="abstract_pic" th:src="${film.film_pic}">-->
+									<img class="abstract_img" id="abstract_pic" th:src="@{/get/photo/film/{imgName}(imgName=${film.film_pic})}">
+								</div>
+								<div class="col-xs-7 col-sm-7">
+									<p th:text="${film.film_name}" class="film_title"></p>
+									<p th:text="${film.film_desc}" class="film_intro"></p>
+									<p th:text="'主演:'+${film.actor_toghter}" class="film_intro"></p>
+									<p class="film_data">今天<span id="cinema_count">251</span>家影院放映<span
+											id="show_count">2987</span>场</p>
+								</div>
+								<div class="col-xs-2 col-sm-2">
+									<p class="film_grade"><span id="film_score">8.9</span>分</p>
+									<button type="button" class="btn btn-danger" th:onclick="film_detail([[${film.film_id}]])">购票</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <div style="background: skyblue; width: 100%; height: 150rem;"></div> -->
+		</div>
+
+		<!-- Navigation bar -->
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+			<div class="row">
+				<div class="col-xs-3 col-sm-3">
+					<a href="/index" class="nav_action">
+						<span class="glyphicon glyphicon-film">
+							<p>电影</p>
+						</span>
+					</a>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<a href="/cinema">
+						<span class="glyphicon glyphicon-blackboard">
+							<p>影院</p>
+						</span>
+					</a>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<a href="/message">
+						<span class="glyphicon glyphicon-bell">
+							<p>消息</p>
+						</span>
+					</a>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<a href="/mine">
+						<span class="glyphicon glyphicon-user">
+							<p>我的</p>
+						</span>
+					</a>
+				</div>
+			</div>
+		</nav>
+		<script>
+			function getCookie(cname)
+			{
+				var name = cname + "=";
+				var ca = document.cookie.split(';');
+				for(var i=0; i<ca.length; i++)
+				{
+					var c = ca[i].trim();
+					if (c.indexOf(name)==0) return true;
+				}
+				return false;
+			};
+			if(getCookie("token")){
+				var websocket = null;
+				if('WebSocket' in window){
+					websocket = new WebSocket("ws://gqpweb.natapp1.cc/webSocket");
+				}else{
+					alert("该浏览器不支持websocket！");
+				}
+				websocket.onopen = function (event) {
+					console.log('建立连接');
+				}
+				websocket.onclose = function (event) {
+					console.log('连接关闭');
+				}
+				websocket.onmessage = function (event){
+					var data=event.data.split("|")
+					var type=data[0];
+					var num=data[1];
+					if(localStorage.getItem(type)==null){
+						localStorage.setItem(type,num);
+					}else{
+						localStorage.setItem(type,num+localStorage.getItem(type));
+					}
+					console.log('收到消息：'+event.data);
+				}
+				websocket.onerror = function () {
+					alert('websocket通信发生错误！');
+				}
+				websocket.onbeforeunload = function (){
+					websocket.close();
+				}
+			}
+		</script>
+	</body>
+</html>

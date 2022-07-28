@@ -1,0 +1,73 @@
+.cinema_top {
+    border-bottom: #d8d8d8 solid .5px;
+    height: 11.5rem;
+    line-height: 11.5rem;
+    background: #f6f5f5;
+    color: #666666;
+    font-size: 25pt;
+}
+
+.cinema_search {
+    /*margin: -13.2rem 0 -15.9rem 0;*/
+    color: #b2b2b2;
+    font-size: 24pt;
+    /* text-align: center; */
+}
+
+.cinema_search_click {
+    /*margin-top: 3.6rem;*/
+    background: #ffffff;
+    border: #e6e6e6 solid .15rem;
+    border-radius: 1rem;
+    /*padding: 2rem 31rem;*/
+}
+
+.search_click_text {
+    position: absolute;
+    margin-top: -4px;
+    margin-left: -110px;
+}
+
+.cinema_abstract {
+    padding: 2rem 3.5rem;
+    border-bottom: #e6e6e6 solid .15rem;
+    background: #fefefe;
+    height: 23rem;
+}
+
+.cinema_title {
+    text-align: left;
+    color: #000000;
+    font-size: 30pt;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.cinema_intro {
+    text-align: left;
+    color: #696969;
+    font-size: 25pt;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.cinema_price1 {
+    margin-left: 3rem;
+    color: #dd3f3b;
+    font-size: 32pt;
+    float: right;
+}
+
+.cinema_price2 {
+    color: #dd3f3b;
+    font-size: 22pt;
+}
+
+.label-default,
+.label-warning {
+    margin-right: 1rem;
+    float: left;
+    font-size: 22pt;
+}

@@ -1,0 +1,270 @@
+/* All */
+body {
+	background: #f5f5f5;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.full-width-div {
+	margin-top: 13.2rem;
+	margin-bottom: 14.7rem;
+	text-align: center;
+}
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+	table-layout: fixed;
+}
+
+.cinema_abstract {
+	padding: 3rem 3.5rem;
+	/* border-bottom: #e6e6e6 solid .15rem; */
+	background: #fefefe;
+	height: 17.2rem;
+}
+
+.cinema_title {
+	text-align: left;
+	color: #000000;
+	font-size: 28pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.cinema_intro {
+	text-align: left;
+	color: #696969;
+	font-size: 25pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.img_background {
+	padding-right: 0;
+	padding-left: 0;
+	width: 100%;
+	height: 38rem;
+	position: relative;
+	overflow: hidden;
+}
+
+.img_background::before {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	/* top: -102%; */
+	background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(/img/movie/Sister.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	transform: scale(1.3);
+	filter: blur(25px);
+	z-index: -1;
+}
+
+.ahh {
+	padding-right: 0;
+	padding-left: 0;
+	width: 100%;
+	height: 38rem;
+	position: relative;
+	overflow: hidden;
+	/*****************/
+	/* background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(./img/movie/Sister.jpg);
+	background-repeat: no-repeat;
+	background-size: cover; */
+	/*transform: scale(1.3); */
+	/* filter: blur(25px); */
+	/* z-index: -1; */
+}
+
+.ahh::before {
+	content: "";
+	position: absolute;
+	/* width: 100%; */
+	/* height: 100%; */
+	left: 0;
+	/********/
+	/* background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(./img/movie/Sister.jpg); */
+	background-repeat: no-repeat;
+	background-size: cover;
+	transform: scale(1.3);
+	filter: blur(25px);
+	z-index: -1;
+}
+
+.still_position {
+	/* top: 50%; */
+	/* left: 50%; */
+	/* transform: translate(-50%, -50%); */
+	margin-top: -38rem;
+}
+
+.pages {
+	z-index: 999;
+	line-height: 38rem;
+	white-space: nowrap;
+	scroll-behavior: smooth;
+	/* 可以使窗口平稳滚动 */
+	white-space: nowrap;
+	/*文本不会换行，文本会在在同一行上继续*/
+	overflow-y: auto;
+	/*禁止滑动*/
+	overflow: auto;
+	/* winphone8和android4+ 和 ios8 */
+	-webkit-overflow-scrolling: touch;
+}
+
+
+.pages img {
+	scroll-behavior: smooth;
+	margin-left: 3rem;
+	width: 22%;
+}
+
+#page1_3 img {
+	width: 25%;
+	border: #FFFFFF solid .3rem;
+}
+
+#page7_3 img {
+	margin-right: 38%;
+}
+
+.caret {
+	position: fixed;
+	/* z-index: 999; */
+	width: 0;
+	height: 0;
+	border-top: none;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-bottom: 100px solid red;
+}
+
+.film_abstract {
+	padding: 2rem 2rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 15.2rem;
+}
+
+#title {
+	color: #333333;
+	font-size: 30pt;
+}
+
+#score {
+	margin-left: 1rem;
+	color: #f3b73f;
+	font-size: 30pt;
+}
+
+.score_stable {
+	margin-left: -.9rem;
+	font-size: 23pt;
+}
+
+.intro {
+	color: #999999;
+	font-size: 25pt;
+}
+
+.data {
+	text-align: left;
+	border-bottom: #e6e6e6 solid .15rem;
+	height: 11.5rem;
+	line-height: 11.5rem;
+	background: #fefefe;
+	color: #666666;
+	font-size: 26pt;
+
+	white-space: nowrap;
+	/*文本不会换行，文本会在在同一行上继续*/
+	overflow-y: auto;
+	/*可滑动*/
+}
+
+.data::-webkit-scrollbar {
+	display: none;
+}
+
+.data a {
+	padding: 0 2.5rem 3rem 2.5rem;
+	color: #666666;
+}
+
+.data a:visited,
+a:hover,
+a:link {
+	text-decoration: none;
+}
+
+#page1_2 {
+	color: #dd3f3b;
+	border-bottom: #dd3f3b solid 0.5rem;
+}
+
+
+
+
+.data_abstract {
+	padding: 1rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 15.5rem;
+}
+
+.data_title {
+	margin-top: 1rem;
+	color: #333333;
+	font-size: 35pt;
+}
+
+.data_intro {
+	margin-top: -1.5rem;
+	color: #999999;
+	font-size: 20.5pt;
+}
+
+.data_language {
+	margin-top: -.5rem;
+	color: #333333;
+	font-size: 26pt;
+}
+
+#situation {
+	margin-top: -.8rem;
+}
+
+.data_price {
+	color: #dc5042;
+	font-size: 21pt;
+}
+
+#price {
+	font-size: 32pt;
+}
+
+.btn-danger {
+	margin-top: 3rem;
+	padding: 1.4rem 2.8rem;
+	border: none;
+	border-radius: .8rem;
+	font-size: 24pt;
+}
+
+iframe {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 228.2rem;
+}
+
+.search_iframe{
+	width: 100%;
+	height: auto;
+}

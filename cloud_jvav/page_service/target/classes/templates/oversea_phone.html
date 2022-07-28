@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="./css/login.css">
+		<link rel="stylesheet" href="./css/nav.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="./js/mine.js"></script>
+		<script src="/vue/vue.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<a class="back" href="javascript:history.go(-1)"><span class="nav_login">登录</span></a>
+		</nav>
+
+		<!-- login -->
+		<div class="full-width-div">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<p class="login_title">海外手机密码登录</p>
+				</div>
+				<div class="col-xs-12 col-sm-12">
+					<!-- sign -->
+					<form role="form">
+						<div class="form-group">
+							<!-- city -->
+							<div class="input-group">
+								<span class="input-group-btn">
+									<buton type="button" class="btn btn-primary phone_city" onclick="city_jump()">
+										+86</button>
+								</span>
+								<input id="name" onpropertychange="signbtn()" oninput="signbtn()" type="tel"
+									class="form-control phone_number" placeholder="手机号">
+							</div>
+							<!-- password -->
+							<input id="password" onpropertychange="signbtn()" oninput="signbtn()" type="password"
+								class="form-control password" placeholder="密码">
+							<!-- button -->
+							<input id="sign" type="button" value="登录" disabled>
+						</div>
+					</form>
+					<!-- other -->
+					<a href="login_phone.html">
+						<div class="col-xs-6 col-sm-6">
+							<p class="sign_other_left">短信验证登录/注册</p>
+						</div>
+					</a>
+					<a href="login.html">
+						<div class="col-xs-6 col-sm-6">
+							<p class="sign_other_right">JVAV帐号密码登录</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

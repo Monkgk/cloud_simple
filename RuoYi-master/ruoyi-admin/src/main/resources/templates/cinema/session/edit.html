@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<th:block th:include="include :: header('修改场次')" />
+</head>
+<body class="white-bg">
+	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+		<form class="form-horizontal m" id="form-session-edit" th:object="${info}">
+			<input id="RoomId" name="room_id" type="hidden" th:field="*{room_id}"/>
+			<input id="CinemaId" name="cinema_id" type="hidden" th:value="*{cinema_id}"   />
+			<input id="FilmId" name="film_id" type="hidden" th:value="*{film_id}"   />
+			<div class="form-group">
+				<label class="col-sm-3 control-label is-required">影院名称：</label>
+				<div class="col-sm-8">
+					<div class="input-group">
+						<input class="form-control" type="text" onclick="selectCinemaTree()" id="CinemaName" readonly="true" th:value="*{cinema_name}" required>
+						<span class="input-group-addon"><i class="fa fa-search"></i></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label is-required">影片名称：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" onclick="selectFilmTree()" id="FilmName" readonly="true" th:value="*{film_name}" required>
+					<span class="input-group-addon"><i class="fa fa-search"></i></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label is-required">放映厅名称：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" onclick="selectRoomTree()" id="RoomName" readonly="true" th:value="*{room_name}" required>
+					<span class="input-group-addon"><i class="fa fa-search"></i></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label is-required">放映时间：</label>
+				<div class="col-sm-8">
+					<div class="input-group date">
+						<!--						<input type="text" class="form-control" id="start_time" name="start_time" placeholder="yyyy-MM-dd HH:mm">-->
+						<input type="text" class="form-control" id="start_time" name="start_time" placeholder="yyyy-MM-dd HH:mm" th:value="*{#dates.format(start_time,'yyyy-MM-dd HH:mm')}" required>
+						<span class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">场次状态：</label>
+				<div class="col-sm-8">
+					<div class="radio-box" th:each="dict : ${@dict.getType('session_status')}">
+						<input type="radio" th:id="${dict.dictCode}" name="session_status" th:value="${dict.dictValue}" th:field="*{session_status}">
+						<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<th:block th:include="include :: footer" />
+	<script type="text/javascript">
+		var prefix = ctx + "cinema/session";
+
+		function submitHandler() {
+	        if ($.validate.form()) {
+	        	$.operate.save(prefix + "/edit", $('#form-session-edit').serialize());
+	        }
+	    }
+
+		/*影院管理-新增-选择父部门树*/
+		function selectCinemaTree() {
+			var options = {
+				title: '影院选择',
+				width: "380",
+				url: prefix + "/selectCinemaTree/" + $("#CinemaId").val(),
+				callBack: cinemaDoSubmit
+			};
+			$.modal.openOptions(options);
+		}
+
+		function cinemaDoSubmit(index, layero){
+			var body = $.modal.getChildFrame(index);
+			$("#CinemaId").val(body.find('#CinemaId').val());
+			$("#CinemaName").val(body.find('#CinemaName').val());
+			$.modal.close(index);
+		}
+
+		/*影片管理-新增-选择父部门树*/
+		function selectFilmTree() {
+			var options = {
+				title: '影片选择',
+				width: "380",
+				url: prefix + "/selectFilmTree/" + $("#FilmId").val(),
+				callBack: FilmdoSubmit
+			};
+			$.modal.openOptions(options);
+		}
+
+		function FilmdoSubmit(index, layero){
+			var body = $.modal.getChildFrame(index);
+			$("#FilmId").val(body.find('#FilmId').val());
+			$("#FilmName").val(body.find('#FilmName').val());
+			$.modal.close(index);
+		}
+
+		/*放映厅管理-新增-选择父部门树*/
+		function selectRoomTree() {
+			var options = {
+				title: '放映厅选择',
+				width: "380",
+				url: prefix + "/selectRoomTree/" + $("#RoomId").val(),
+				callBack: RoomdoSubmit
+			};
+			$.modal.openOptions(options);
+		}
+
+		function RoomdoSubmit(index, layero){
+			var body = $.modal.getChildFrame(index);
+			$("#RoomId").val(body.find('#RoomId').val());
+			$("#RoomName").val(body.find('#RoomName').val());
+			$.modal.close(index);
+		}
+
+		// $("#datetimepicker-demo-3").datetimepicker({
+		// 	format: "yyyy-mm-dd hh:ii",
+		// 	autoclose: true
+		// });
+
+		// $('#start_time').datetimepicker({
+		// 	format: "yyyy-mm-dd hh:ii",
+		// 	startDate:"2022:05:03",
+		// 	autoclose: true
+		// });
+		layui.use('laydate', function(){
+			var laydate = layui.laydate;
+			laydate.render({
+				elem: '#start_time',
+				min: new Date().toLocaleString(),
+				type: 'datetime',
+				format: "yyyy-MM-dd HH:mm",
+				trigger: 'click'
+			});
+		});
+	</script>
+</body>
+</html>

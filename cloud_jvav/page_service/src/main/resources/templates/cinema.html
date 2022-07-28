@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="./css/home.css">
+		<link rel="stylesheet" href="./css/cinema.css">
+		<link rel="stylesheet" href="./css/nav.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script src="/vue/vue.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<span>影院</span>
+		</nav>
+
+		<!-- Cinema -->
+		<div id="app" class="full-width-div">
+			<!-- Control center -->
+			<div class="row cinema_top">
+				<!-- Search -->
+				<div class="col-xs-10 col-sm-10 pages" style="width: 100%;height: 100%;">
+					<!-- Local -->
+					<div class="col-xs-2 col-sm-2 local">
+<!--						<span id="location">深圳</span>&nbsp;-->
+						<span id="location">&nbsp;&nbsp;</span>&nbsp;
+						<span class="glyphicon glyphicon-triangle-bottom"></span>
+					</div>
+<!--					<div  style="width: 80%;height: 100%;padding: 1.6rem 1.6rem 0">-->
+
+						<span class="glyphicon glyphicon-search cinema_search_click" style="float: left;border-radius: 18px;border: 1px solid #ccc;height: 80%;width:81%;margin: 1.3rem auto;padding: 1.6rem 0"/>
+							<input id="search_like" type="text" v-model="search_like" @keyup.enter="toSearchCinema" placeholder="找影院" style="border:none;width: 85%;height: 100%;padding: 2px"/>
+						</span>
+<!--					</div>-->
+				</div>
+			</div>
+			<!-- Cinema Name -->
+			<iframe  class="search_iframe" id="search_iframe" v-bind:src="iframe_url" align="center" onload="iFrameHeight()"
+					scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+		</div>
+
+		<!-- Navigation bar -->
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+			<div class="row">
+				<div class="col-xs-3 col-sm-3">
+					<a href="/">
+						<span class="glyphicon glyphicon-film">
+							<p>电影</p>
+						</span>
+					</a>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<a href="/cinema" class="nav_action">
+						<span class="glyphicon glyphicon-blackboard">
+							<p>影院</p>
+						</span>
+					</a>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<a href="/message">
+						<span class="glyphicon glyphicon-bell">
+							<p>消息</p>
+						</span>
+					</a>
+				</div>
+				<div class="col-xs-3 col-sm-3">
+					<a href="/mine">
+						<span class="glyphicon glyphicon-user">
+							<p>我的</p>
+						</span>
+					</a>
+				</div>
+			</div>
+		</nav>
+		<script>
+			function iFrameHeight(){undefined
+				var ifm= document.getElementById("search_iframe");
+				var subWeb = document.frames ? document.frames["search_iframe"].document :    ifm.contentDocument;
+				if(ifm != null && subWeb != null) {undefined
+					$("#search_iframe").height(0);//此处关键处 莫忘  清除上一个子页面高度的影响
+					$("#search_iframe").height(subWeb.body.scrollHeight);
+					//ifm.height = subWeb.body.scrollHeight;
+				}
+			}
+		</script>
+		<script>
+			new Vue({
+				el:"#app",
+				data:{
+					search_like:"",
+					iframe_url:"/cinema/search"
+				},
+				methods:{
+					toSearchCinema(){
+						if (this.search_like!=""){
+							this.iframe_url="/cinema/search/"+this.search_like;
+						}else{
+							this.iframe_url="/cinema/search";
+						}
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

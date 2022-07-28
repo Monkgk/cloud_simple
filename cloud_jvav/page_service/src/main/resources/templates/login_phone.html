@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="../css/login.css">
+		<link rel="stylesheet" href="../css/nav.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../js/mine.js"></script>
+		<script src="/vue/vue.js"></script>
+		<script src="/axios/axios.min.js"></script>
+		<script type="text/javascript" src="/js/input_disable.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<a class="back" href="javascript:history.go(-1)"><span class="nav_login">注册</span></a>
+		</nav>
+
+		<!-- login -->
+		<div class="full-width-div">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<p class="login_title">手机注册</p>
+					<p class="login_subtitle">未注册的手机，注册后即可登录</p>
+				</div>
+				<div id="form" class="col-xs-12 col-sm-12">
+					<!-- sign -->
+					<form role="form">
+						<div class="form-group">
+							<!-- phone -->
+							<div class="input-group" style="margin-bottom:3.125rem">
+								<span class="input-group-btn">
+									<span class="btn btn-primary phone_city" disabled>
+										+86</span>
+								</span>
+								<input id="name" onpropertychange="signbtn(),postbtn()" oninput="signbtn(),postbtn()" type="tel"
+									class="form-control phone_number info_summit" placeholder="手机号" v-model="user.user_phone">
+							</div>
+							<!-- name -->
+							<div class="input-group">
+								<span class="input-group-btn">
+									<span class="btn btn-primary get_code" disabled>昵称</span>
+								</span>
+								<input id="user_name" onpropertychange="signbtn(),postbtn()" oninput="signbtn(),postbtn()" type="text"
+									   class="form-control code info_summit" placeholder="用户名" v-model="user.user_name">
+							</div>
+							<!-- code -->
+							<div class="input-group">
+								<span class="input-group-btn">
+									<span class="btn btn-primary get_code" disabled>密码</span>
+								</span>
+								<input id="password" onpropertychange="signbtn(),postbtn()" oninput="signbtn(),postbtn()" type="password"
+									class="form-control code info_summit" placeholder="密码" v-model="user.user_pwd">
+							</div>
+							<!-- recode -->
+							<div class="input-group">
+								<span class="input-group-btn">
+									<span class="btn btn-primary get_code" disabled>密码</span>
+								</span>
+								<input id="password2" onpropertychange="signbtn(),postbtn()" oninput="signbtn(),postbtn()" type="password"
+									   class="form-control code info_summit" placeholder="再次输入密码" v-model="user_pwd2">
+							</div>
+							<!-- button -->
+							<button id="sign" class="post" type="button" v-on:click="register" disabled>注册</button>
+						</div>
+					</form>
+					<!-- other -->
+					<a href="/mine/login">
+						<div class="col-xs-6 col-sm-6">
+							<p class="sign_other_left">JVAV帐号密码登录</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<script>
+			new Vue({
+				el:"#form",
+				data(){
+					return {
+						user_pwd2:"",
+						user:{
+							user_phone: "",
+							user_pwd: "",
+							user_name:""
+						}
+					}
+				},
+				methods:{
+					register(){
+						if(this.user_pwd2 == this.user.user_pwd){
+							if(this.check()) {
+								var data = this.user;
+								axios.post('/mine/toregister', data,
+										{
+											headers: {'Content-Type': 'application/json'}
+										})
+										.then((response) => {
+											if (response.data.code == 2002) {
+												alert(response.data.msg);
+												window.location.href = '/mine/login';
+											} else {
+												alert(response.data.msg)
+											}
+										})
+										.catch(function (error) {
+											console.log(error);
+										});
+							}
+						}else{
+							alert("两次密码输入不一致");
+						}
+					},
+					check(){
+						var phone = this.user.user_phone;
+						var regex = /^(13[0-9]{9})|(15[0-9]{9})|(17[0-9]{9})|(18[0-9]{9})|(19[0-9]{9})$/;
+						if (!regex.test(phone)) {
+							alert("请录入正确的手机号码！");
+							return false;
+						}
+						return true;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

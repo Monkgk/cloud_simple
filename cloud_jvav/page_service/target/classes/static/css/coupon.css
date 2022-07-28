@@ -1,0 +1,88 @@
+.coupon {
+	padding: 0;
+}
+
+.coupon_price {
+	margin-top: 5rem;
+	margin-left: 3rem;
+	padding-top: 4.8rem;
+	border-radius: 1rem 0 0 1rem;
+	background: #c43330;
+	height: 33rem;
+}
+
+.coupon_price p {
+	color: #fff;
+	font-size: 35pt;
+	margin-bottom: -1rem;
+}
+
+.coupon_tariff {
+	font-size: 80pt;
+}
+
+.line {
+	margin: 0 auto;
+	width: 60%;
+	height: 2px;
+	background: #fff;
+}
+
+.tariff_intro {
+	font-size: 28pt;
+}
+
+.cinema_title {
+	color: #888888;
+	font-size: 26pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.coupon_abstract {
+	padding: 3rem;
+	margin-top: 5rem;
+	margin-right: 3rem;
+	border-radius: 0 1rem 0 0;
+	border-top: #d8d8d8 solid .15rem;
+	border-right: #d8d8d8 solid .15rem;
+	border-bottom: #d8d8d8 solid .15rem;
+	border-left:#c43330 dashed .6rem;
+	background: #fff;
+	/* height: 33rem; */
+	height: 25rem;
+}
+
+.coupon_title {
+	text-align: left;
+	color: #3e3e3e;
+	font-size: 30pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.coupon_intro {
+	text-align: left;
+	color: #999999;
+	font-size: 25pt;
+	/* overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis; */
+}
+
+.coupon_data {
+	text-align: right;
+	padding-right: 3rem;
+	margin-right: 3rem;
+	line-height: 8rem;
+	border-radius: 0 0 1rem 0;
+	border-right: #d8d8d8 solid .15rem;
+	border-bottom: #d8d8d8 solid .15rem;
+	border-left:#c43330 dashed .6rem;
+	background: #fff;
+	height: 8rem;
+	color: #999999;
+	font-size: 25pt;
+}

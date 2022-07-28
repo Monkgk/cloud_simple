@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="/css/mine.css">
+		<link rel="stylesheet" href="/css/order.css">
+		<link rel="stylesheet" href="/css/nav.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="/js/mine.js"></script>
+		<script src="/vue/vue.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<!-- <a class="back" href="mine.html"><span class="glyphicon glyphicon-chevron-left"></span></a>
+			<span class="nav_login">我的订单</span> -->
+			<a class="back" href="javascript:history.go(-1)"><span class="nav_login">我的订单</span></a>
+		</nav>
+
+		<!-- Order -->
+		<div class="full-width-div">
+			<div class="row">
+				<!-- e.g.1 -->
+				<div id="order_frame" class="col-xs-12 col-sm-12" th:each="order:${Orders}">
+					<!-- cinema name -->
+					<a th:href="@{'/order/detail/'+${order.order_id}}">
+						<div class="cinema_abstract">
+							<p class="cinema_title" th:text="${order.sessionInfo.cinema.cinema_name}">金逸影城IMAX（光美湛江赤坎店）
+								<span class="glyphicon glyphicon-chevron-right cinema_icon"></span>
+							</p>
+						</div>
+					</a>
+					<!-- film name -->
+<!--					<a  th:href="${order.order_status}=='1'?@{'/order/detail/'+${order.order_id}}:(${order.order_status}=='4')?@{'/order/confirm'}:'#'">-->
+					<a  th:href="${order.order_status}=='2'?('/order/detail/'+${order.order_id}):(${order.order_status}=='4'?'/order/confirm':'#')">
+						<div class="film_abstract">
+							<div class="col-xs-3 col-sm-3">
+								<img class="abstract_img" id="abstract_pic" th:src="@{/get/photo/film/{imgName}(imgName=${order.sessionInfo.film.film_pic})}">
+							</div>
+							<div class="col-xs-9 col-sm-9 detail">
+								<p class="film_title" th:text="${order.sessionInfo.film.film_name}">名侦探柯南：绯色的子弹<span>&nbsp;</span><span>2</span><span>张</span></p>
+								<p class="film_intro" th:text="${#dates.format(order.sessionInfo.start_time,'MM月dd日 HH:mm')}">04月17日 18:10</p>
+								<p class="film_intro"  >
+									<span th:text="${order.sessionInfo.room.room_name}">1号激光厅</span>
+									<span  th:each="seat:${order.seatList}" th:text="' '+${seat.seat_row}+'排'+${seat.seat_column}+'座 '">6排9座,6排8座</span>
+								</p>
+							</div>
+						</div>
+					</a>
+					<!-- price -->
+					<div class="price_abstract">
+						<div class="col-xs-6 col-sm-6 order_bottom">
+							<p class="order_price">总价：<span id="price" th:text="${order.total}">60</span>元</p>
+						</div>
+						<div class="col-xs-6 col-sm-6 order_bottom">
+							<p class="order_statement" th:text="${order.order_status_msg}">未消费</p>
+						</div>
+					</div>
+				</div>
+				<!-- e.g.2 -->
+<!--				<div id="order_frame" class="col-xs-12 col-sm-12">-->
+<!--					&lt;!&ndash; cinema name &ndash;&gt;-->
+<!--					<a href="#">-->
+<!--						<div class="cinema_abstract">-->
+<!--							<p class="cinema_title">金影电影城（爱华广场店）-->
+<!--								<span class="glyphicon glyphicon-chevron-right cinema_icon"></span>-->
+<!--							</p>-->
+<!--						</div>-->
+<!--					</a>-->
+<!--					&lt;!&ndash; film name &ndash;&gt;-->
+<!--					<a href="#">-->
+<!--						<div class="film_abstract">-->
+<!--							<div class="col-xs-3 col-sm-3">-->
+<!--								<img class="abstract_img" id="abstract_pic" src="./img/movie/Conan.jpg">-->
+<!--							</div>-->
+<!--							<div class="col-xs-9 col-sm-9 detail">-->
+<!--								<p class="film_title">名侦探柯南：绯色的子弹<span>&nbsp;</span><span>2</span><span>张</span></p>-->
+<!--								<p class="film_intro">04月17日 18:25</p>-->
+<!--								<p class="film_intro">一号厅5排3座,5排4座</p>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</a>-->
+<!--					&lt;!&ndash; price &ndash;&gt;-->
+<!--					<div class="price_abstract">-->
+<!--						<div class="col-xs-6 col-sm-6 order_bottom">-->
+<!--							<p class="order_price">总价：<span id="price">56</span>元</p>-->
+<!--						</div>-->
+<!--						<div class="col-xs-6 col-sm-6 order_bottom">-->
+<!--							<p class="order_statement">退款成功</p>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+				
+			</div>
+		</div>
+	</body>
+</html>

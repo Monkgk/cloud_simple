@@ -1,0 +1,311 @@
+/* All */
+body {
+	background: #f5f5f5;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.full-width-div {
+	margin-top: 13.2rem;
+	margin-bottom: 14.7rem;
+	text-align: center;
+}
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+	table-layout: fixed;
+}
+
+
+
+.flim_abstract {
+	padding: 3rem 3.5rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 25rem;
+}
+
+.flim_title {
+	text-align: left;
+	color: #000000;
+	font-size: 28pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.flim_intro {
+	padding-bottom: 2rem;
+	text-align: left;
+	color: #9b9b9b;
+	font-size: 25pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	border-bottom: #e6e6e6 solid .15rem;
+}
+
+.warn {
+	line-height: 6rem;
+	text-align: left;
+	vertical-align: middle;
+	color: #676767;
+	font-size: 25pt;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.warn img {
+	width: 5.5%;
+}
+
+.hall_abstract {
+	z-index: -1;
+	left: 50%;
+	transform: translate(-50%);
+	translate: tr;
+	border-top: 4.5rem solid #dcdcdc;
+	border-left: 1.5rem solid transparent;
+	border-right: 1.5rem solid transparent;
+	height: 0;
+	width: 42%;
+}
+
+.hall {
+	z-index: 999;
+	top: 100%;
+	transform: translate(0, -100%);
+	color: #000000;
+	font-size: 25pt;
+}
+
+.seating_chart {
+	margin-top: -5rem;
+	font-size: 28pt;
+	/* padding: 2rem 0 2rem 3rem; */
+	/* border-top: #e6e6e6 solid .15rem;
+	border-bottom: #e6e6e6 solid .15rem; */
+	/* background: #fefefe; */
+	height: 90rem;
+}
+
+.staff_list {
+	/* border-bottom: #e6e6e6 solid .15rem; */
+	/* background: #fefefe; */
+	height: 90rem;
+	white-space: nowrap;
+	/*文本不会换行，文本会在在同一行上继续*/
+	overflow-y: auto;
+	/*可滑动*/
+}
+
+.staff_list2 {
+	float: left;
+	white-space: nowrap;
+	/*文本不会换行，文本会在在同一行上继续*/
+	overflow-y: auto;
+	/*可滑动*/
+}
+
+.seating_chart2 {
+	height: 25rem;
+	white-space: nowrap;
+	/*文本不会换行，文本会在在同一行上继续*/
+	overflow-y: auto;
+	/*可滑动*/
+}
+
+.staff_list::-webkit-scrollbar {
+	display: none;
+}
+
+.box1 {
+	/* display: block;
+	position: relative; */
+	/* width: 21.6rem; */
+	height: auto;
+	/* background: tomato; */
+	display: inline-block;
+	/*行内块元素*/
+}
+
+
+/* seat */
+/* #seat_area {
+	background-color: tomato;
+} */
+
+.front {
+	margin: 0 auto;
+	margin-top: 4rem;
+	margin-bottom: 2rem;
+	width: 14%;
+	font-size: 20pt;
+	background-color: #e0e0e0;
+	color: #737373;
+	text-align: center;
+	padding: .2rem;
+	border-radius: 1rem;
+}
+
+.booking_area {
+	/* float: right;
+	position: relative; */
+	/* background-color: skyblue; */
+	/* width: 200px;
+	height: 450px; */
+}
+
+.booking_area h3 {
+	margin: 5px 5px 0 0;
+	font-size: 16px;
+}
+
+.seat_title {
+	margin-top: 2rem;
+	margin-left: 2.5rem;
+	text-align: left;
+	line-height: 80px;
+	font-size: 25pt;
+	color: #333333;
+}
+
+.booking_area p span {
+	color: #666
+}
+
+div.seatCharts-cell {
+	/* background-color: #c3c3c3; */
+	color: #c3c3c3;
+	height: 7rem;
+	width: 7rem;
+	line-height: 7rem;
+	margin: 1.5rem;
+	float: left;
+	text-align: center;
+	outline: none;
+	font-size:30pt;
+}
+
+div.seatCharts-seat {
+	color: black;
+	cursor: pointer;
+	-webkit-border-radius: 1.5rem;
+	-moz-border-radius: 1.5rem;
+	border-radius: 1.5rem;
+}
+
+div.seatCharts-row {
+	width: 125%;
+	white-space: nowrap;
+	/*文本不会换行，文本会在在同一行上继续*/
+	overflow-y: auto;
+	/* height: 35px; */
+}
+
+div.seatCharts-row::-webkit-scrollbar {
+	display: none;
+}
+
+div.seatCharts-seat.available {
+	background-color: white;
+	border: #cdcdcd solid .2rem;
+}
+
+div.seatCharts-seat.focused {
+	background-color: white;
+	border: #cdcdcd solid .2rem;
+}
+
+div.seatCharts-seat.selected {
+	background-color: #5bc893;
+	border: #5bc893 solid .2rem;
+}
+
+div.seatCharts-seat.unavailable {
+	background-color: #eb5c56;
+	border: #eb5c56 solid .2rem;
+	cursor: not-allowed;
+}
+
+div.seatCharts-container {
+	white-space: nowrap;
+	/*文本不会换行，文本会在在同一行上继续*/
+	overflow-y: auto;
+	/*可滑动*/
+	
+	/* width: 400px; */
+	padding: 20px;
+	/* float: left; */
+}
+
+div.seatCharts-legend {
+	padding-left: 0px;
+	/* position: absolute; */
+	/* bottom: 16px; */
+}
+
+ul.seatCharts-legendList {
+	padding-left: 0px;
+}
+
+.seatCharts-legendItem {
+	/* float: left; */
+	width: 90px;
+	/* margin-top: 10px; */
+	line-height: 2;
+}
+
+span.seatCharts-legendDescription {
+	/* margin-left: 5px; */
+	line-height: 30px;
+}
+
+.checkout-button {
+	display: block;
+	width: 80px;
+	height: 24px;
+	line-height: 20px;
+	margin: 10px auto;
+	border: 1px solid #999;
+	font-size: 14px;
+	cursor: pointer
+}
+
+#seats_chose {
+	margin-left: 2.5rem;
+	width: 200%;
+	padding: 0;
+	/* max-height: 150px; */
+	overflow-y: auto;
+	overflow-x: none;
+}
+
+#seats_chose li {
+	float: left;
+	width: 20rem;
+	height: 9rem;
+	line-height: 8.5rem;
+	border: 1px solid #dddddd;
+	border-radius: 1rem;
+	background: white;
+	color: #666666;
+	margin: 6px;
+	font-size: 25pt;
+	text-align: center;
+	list-style: none;
+}
+
+.navbar-fixed-bottom {
+	height: 43rem !important;
+}
+
+.btn-warning {
+	background-color: #f09d38;
+	border: #c07e2b solid .15rem;
+	width: 96%;
+	font-size: 32pt;
+	padding: 2rem 0;
+	border-radius: 2rem;
+}

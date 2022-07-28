@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>JVAV电影</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/mine.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/info.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <!--		<script src="/vue/vue.js"></script>-->
+</head>
+<body>
+<!-- Banner -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <a class="back" href="javascript:history.go(-1)"><span class="nav_login">个人信息</span></a>
+</nav>
+
+<div class="full-width-div">
+    <!--        <a href="/mine/info/change?type=head" class="info_body_img">-->
+    <a href="/mine/info/change/head" class="info_body_img">
+        <div class="info_title">头像</div>
+        <div class="col-xs-1 col-sm-1 msg_right"></div>
+        <div class="info_content">
+            <img th:src="@{/user/get/head/{imgName}(imgName=${user_info.user_head})}">
+        </div>
+    </a>
+    <a href="/mine/info/change/name" class="info_body">
+        <div class="info_title">用户名</div>
+        <div class="col-xs-1 col-sm-1 msg_right"></div>
+        <div class="info_content">
+            <span class="info_msg" th:text="${user_info.user_name}">这里填用户名</span>
+        </div>
+    </a>
+    <!--        <a href="/mine/info/change?type=phone" class="info_body_img">-->
+    <a class="info_body">
+        <div class="info_title">手机号</div>
+        <!--            <div class="col-xs-1 col-sm-1 msg_right"></div>-->
+        <div class="info_content">
+            <span class="info_msg" th:text="${user_info.user_phone}">这里填手机号</span>
+        </div>
+    </a>
+    <a href="/mine/info/change/sex" class="info_body">
+        <div class="info_title">性别</div>
+        <div class="col-xs-1 col-sm-1 msg_right"></div>
+        <div class="info_content">
+            <span class="info_msg" th:text="${user_info.user_sex==1?'男':'女'}">这里填性别</span>
+        </div>
+    </a>
+    <a href="/mine/info/change/setpwd" class="info_body">
+        <div class="info_title">修改密码</div>
+        <div class="col-xs-1 col-sm-1 msg_right"></div>
+        <!--            <div class="info_content">-->
+        <!--                <span class="info_msg">这里填修改密码</span>-->
+        <!--            </div>-->
+    </a>
+    <a onclick="quit()" class="info_body">
+        <div class="info_title">退出账号</div>
+        <div class="col-xs-1 col-sm-1 msg_right"></div>
+    </a>
+</div>
+<script>
+    function quit() {
+        $.ajax({
+            url:"/user/cookie/clear"
+        });
+        alert("退出成功");
+        window.location.reload();
+    }
+    function getCookie(cname)
+    {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0; i<ca.length; i++)
+        {
+            var c = ca[i].trim();
+            if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+        }
+        return "";
+    }
+</script>
+</body>
+</html>

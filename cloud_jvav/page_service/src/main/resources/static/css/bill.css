@@ -1,0 +1,89 @@
+/*虚线效果*/
+.box{
+    /*border-top: #00686b 1px dashed;*/
+    OVERFLOW: hidden;
+    height: 1rem;
+    width: 100%;
+    padding-right: 20px;
+    position: relative;
+}
+.line {
+    position: absolute;
+    right: 10px;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(90deg, #00686b , transparent 50%);
+    background-size: 100% 2rem;
+    background-repeat: repeat-x
+}
+.billBlock{
+    margin: 3rem 10rem;
+    height: auto;
+    background-color: white;
+    border-radius: 1.5rem;
+}
+.bill{
+    width: 100%;
+    height: auto;
+}
+.order_info{
+    width: 70%;
+    float: left;
+}
+#film_pic{
+    margin: 4% 3%;
+    /*width: 20%;*/
+    float: right;
+    height: 25.1rem;
+}
+#codeText{
+    margin: 1rem;
+    font-weight: bold;
+    font-size: 5rem ;
+}
+#codeImg{
+    width: 30rem;
+    height: 30rem;
+    margin: 2rem;
+    /*visibility: hidden;*/
+}
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #555;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.bill_chile{
+    text-align: left;
+    padding: 2rem 3rem;
+    font-size: 2rem;
+    color: #9c9c9c;
+}
+.banner{
+    font-weight:bold;
+    font-size: 5rem;
+    text-align: left;
+    color: black;
+}
+#refund{
+    border-radius: 50rem;
+    background-color: #dd3f3b;
+    width: 80%;
+    margin: auto 10%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 3rem;
+    color: whitesmoke;
+}
+.bill_refund{
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}

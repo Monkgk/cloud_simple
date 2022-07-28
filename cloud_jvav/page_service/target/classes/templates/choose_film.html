@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="/css/film.css">
+		<link rel="stylesheet" href="/css/nav.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="/js/mine.js"></script>
+		<script type="text/javascript" src="/js/vip.js"></script>
+		<script src="/vue/vue.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<a class="back" href="javascript:history.go(-1)"><span class="nav_login">影院</span></a>
+		</nav>
+
+		<div  id="app" class="full-width-div">
+			<div class="row">
+				<!-- Local -->
+				<div class="col-xs-12 col-sm-12 cinema_abstract">
+					<p th:text="${cinema.cinema_name}" class="cinema_title">中影德金影城和平店</p>
+					<p th:text="${cinema.cinema_addr}" class="cinema_intro">宝安区福永镇和平村桥和路315号（德金财富广场）</p>
+				</div>
+
+				<!-- Choose Film -->
+				<div class="row changepicker">
+					<!-- Background -->
+					<div class="col-xs-12 col-sm-12 img_background" id="img_background"></div>
+					<!-- Still -->
+					<div class="col-xs-12 col-sm-12 still_position">
+						<div class="pages" id="myTab">
+							<a th:each="film,index:${films}" th:href="${'#page'+film.film_id}" v-on:click="film_move()"   class="choosefilm" data-toggle="tab">
+								<img th:id="${film.film_id}" class="still" th:src="@{/get/photo/film/{imgName}(imgName=${film.film_pic})}">
+							</a>
+						</div>
+						<!-- Caret -->
+						<!-- <div class="caret"></div> -->
+					</div>
+				</div>
+				<!-- Cinema Abstract -->
+				<div id="myTabContent" class="tab-content">
+					<!-- page1 -->
+<!--					<div th:each="film,index:${films}" th:class="${index.count == 1} ? 'tab-pane fade in active' :'tab-pane fade in'"  th:id="${'page'+film.film_id}">-->
+						<div class="row">
+							<div id="#iframeBox" class="col-sm-12 col-xs-12" style="padding: 0; height: auto;">
+								<iframe class="search_iframe" id="search_iframe"  v-bind:src="iframe_url" align="center"
+										 scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+							</div>
+						</div>
+<!--					</div>-->
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/js/changepicker.js"></script>
+		<script>
+			window.onload=function() {
+				var ifm = document.getElementById("search_iframe");
+				var subWeb = document.frames ? document.frames["search_iframe"].document : ifm.contentDocument;
+				if (ifm != null && subWeb != null) {
+					undefined
+					$("#search_iframe").height(0);//此处关键处 莫忘  清除上一个子页面高度的影响
+					$("#search_iframe").height(subWeb.body.scrollHeight);
+				}
+			}
+		</script>
+		<script>
+			new Vue({
+				el:"#app",
+				data:{
+					search_like:"",
+					cinema_id:[[${cinema.cinema_id}]],
+					// th:src="@{'session?id='+${film.film_id}+'&cinema='+${cinema.cinema_id}}"
+					iframe_url:"/cinema/"+[[${cinema.cinema_id}]]+"/film/"+[[${films[0].film_id}]]+"/session"
+				},
+				methods:{
+					toSearchSession(event){
+						var film_id = event.target.id;
+						this.iframe_url="/cinema/"+this.cinema_id+"/film/"+film_id+"/session";
+					},
+					film_move(){
+						var background = document.getElementById('img_background');
+						var pages = document.querySelector(".pages");
+						// var img	= document.querySelector(".still");
+						var stillLeft = event.target.offsetLeft;
+						var stillWidth  = event.target.offsetWidth;
+						var pagesW = pages.offsetWidth;
+						var scrollLeftNum =stillLeft- pagesW / 2 + stillWidth / 2;
+
+						var url = event.target.src;
+						$(background).removeClass('img_background');
+
+						$(background).addClass("ahh");
+						background.style.position = "relative";
+						$(background).css("width", function() {
+							return "100%";
+						});
+						$(background).css('overflow', function() {
+							return "hidden";
+						});
+						background.style.height = "38rem";
+						background.style.left = "0px";
+						background.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)),url(${url})`;
+						background.style.backgroundRepeat = "no-repeat";
+						background.style.backgroundSize = "cover";
+						background.style.filter = "blur(25px)";
+						background.style.zIndex = "-1";
+						pages.scrollLeft = scrollLeftNum;
+						this.toSearchSession(event);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

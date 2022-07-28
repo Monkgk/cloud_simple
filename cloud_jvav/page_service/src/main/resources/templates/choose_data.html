@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="/css/data.css">
+		<link rel="stylesheet" href="/css/cinema.css">
+		<link rel="stylesheet" href="/css/nav.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script type="text/javascript" src="/js/mine.js"></script>
+		<script type="text/javascript" src="/js/vip.js"></script>
+		<script src="/vue/vue.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<a class="back" href="javascript:history.go(-1)"><span class="nav_login" id="film_name">[[${film_name}]]</span></a>
+		</nav>
+
+		<!-- Data -->
+		<div class="full-width-div">
+			<div class="row changepicker">
+				<!-- Data -->
+				<div class="col-xs-12 col-sm-12 pages" style="padding: 0;" id="myTab">
+					<a class="shift" th:each="days,index:${dayCinema}" th:href="${'#page'+index.count}" th:id="${'page'+index.count+'_2'}" data-toggle="tab">
+						<span th:text="${days.key}" >今天4月25日</span>
+					</a>
+				</div>
+				<script type="text/javascript" src="/js/changepicker.js"></script>
+			</div>
+			<!-- Cinema Abstract -->
+			<div id="myTabContent" class="tab-content">
+				<!-- page1 -->
+				<div th:each="datas,index:${dayCinema}" th:class="${index.count == 1} ? 'tab-pane shift fade in active' :'tab-pane shift fade' " th:id="${'page'+index.count}">
+					<div class="row" th:each="cinema:${datas.value}">
+						<!-- e.g.1 -->
+<!--						<a th:href=@{'/cinema/'+${cinema.cinema_id}+'/film/'+${film_id}>-->
+						<a th:href=@{/cinema/{cinema_id}/film/{film_id}(cinema_id=${cinema.cinema_id},film_id=${film_id})}>
+							<div class="col-xs-12 col-sm-12 cinema_abstract">
+								<p class="cinema_title">[[${cinema.cinema_name}]]
+									<span class="cinema_price1">23<span class="cinema_price2">元起</span></span>
+								</p>
+								<p th:text="${cinema.cinema_addr}" class="cinema_intro">宝安区福永镇和平村桥和路315号（德金财富广场）</p>
+								<span class="label label-default">座</span>
+								<span class="label label-default">退</span>
+								<span class="label label-default">改签</span>
+								<span class="label label-warning">小吃</span>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="/css/confirm.css">
+		<link rel="stylesheet" href="/css/nav.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+		<script src="/vue/vue.js"></script>
+		<script src="/axios/axios.min.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<a class="back" href="javascript:history.go(-1)"><span class="nav_login">确认订单</span></a>
+		</nav>
+
+		<!-- Confirm -->
+		<div class="full-width-div">
+			<div class="row">
+				<!-- Countdown -->
+				<div class="col-xs-12 col-sm-12 countdown">
+					<div id="timer"></div>
+					<script type="text/javascript">
+						//Countdown
+						var oBox = document.getElementById('timer');
+						var maxtime = [[${orderInfo.surplus_time}]];
+
+						function CountDown() {
+							if (maxtime >= 0) {
+								minutes = Math.floor(maxtime / 60);
+								seconds = Math.floor(maxtime % 60);
+								msg = "支付剩余时间：" + minutes + ":" + seconds;
+								oBox.innerHTML = msg;
+								--maxtime;
+							} else {
+								clearInterval(timer);
+								window.location.href = "/";
+							}
+						}
+						timer = setInterval("CountDown()", 1000);
+					</script>
+				</div>
+
+				<!-- Abstract -->
+				<div class="col-xs-12 col-sm-12 film_abstract">
+					<p class="film_title" id="film_name" th:each="info:${sessionInfo.film}" th:text="${info.film_name}">我的姐姐</p>
+<!--					<p class="film_intro" id="#" style="color: #e0594a;">今天04-25 17:35 (原版2D)</p>-->
+					<p class="film_intro" id="#" style="color: #e0594a;" th:each="infos:${sessionInfo}">[[${#dates.format(infos.start_time,'MM-dd HH:mm')}]] ([[${infos.film_type}]])</p>
+					<p class="film_intro" id="#" th:each="infos:${sessionInfo}"  >
+						<span th:each="info:${infos.cinema}">[[${info.cinema_name}]] </span>
+						<span th:each="info:${infos.room}">&nbsp;[[${info.room_name}]]</span>
+					</p>
+					<p class="film_intro" ><span id="#" th:each="seat:${seatList}" th:text="${seat.seat_row}+'排'+${seat.seat_column}+'座 '"></span></p>
+				</div>
+				<div class="col-xs-12 col-sm-12 price_abstract">
+					<div class="col-xs-6 col-sm-6" style="padding: 0;">
+						<p class="price_title">票价</p>
+					</div>
+					<div class="col-xs-6 col-sm-6" style="padding: 0;">
+						<p class="price">
+							<span class="tips">含服务费3元/张&nbsp;</span>
+							<span id="total_price" th:each="info:${orderInfo}" th:text="${info.total}">38</span>元
+						</p>
+					</div>
+				</div>
+
+				<!-- Coupon -->
+				<a href="#">
+					<div class="col-xs-12 col-sm-12 more">
+						<div class="col-xs-11 col-sm-11">
+							<p class="price_title">活动和优惠券</p>
+						</div>
+						<div class="col-xs-1 col-sm-1 mine_right"></div>
+					</div>
+				</a>
+
+				<!-- Noted -->
+				<div class="col-xs-12 col-sm-12 noted_abstract">
+					<p class="price_title">退改签须知</p>
+				</div>
+				<div class="col-xs-12 col-sm-12" id="noted_intro" onclick="noted_change()">
+					<p>开场时间24小时内，免费改签</p>
+					<p>开场时间60分钟前，改签手续费3.0元/张</p>
+					<p>影票实际支付金额小于手续费时无法改签</p>
+					<p>开场时间24小时前，可免费退款</p>
+					<p>开场时间60分钟前，退款手续费5.0元/张</p>
+					<p>影票实际支付金额小于手续费时无法退款</p>
+					<p>使用会员卡或享受票减小吃特惠时，不可改签</p>
+					<div class="down"></div>
+				</div>
+
+				<!-- PhoneNum -->
+				<div class="col-xs-12 col-sm-12 more">
+					<div class="col-xs-3 col-sm-3">
+						<p class="price_title" style="color: #000000;">手机号</p>
+					</div>
+					<div class="col-xs-9 col-sm-9 phone_number">
+						<span id="#" th:text="${userPhone}">136*****609</span>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 more_intro">
+					<p>手机号仅用于生成订单，取票码不再以短信发送</p>
+				</div>
+				
+			</div>
+		</div>
+		
+		<!-- Navigation bar -->
+		<nav class="navbar navbar-default navbar-fixed-bottom confirm_bottom">
+			<div class="row">
+				<!-- Privilege -->
+				<div class="col-xs-9 col-sm-9 privilege_text">
+					<span class="glyphicon glyphicon-ok-sign">开场前60分钟可改签</span><br/>
+<!--					<span class="glyphicon glyphicon-ok-sign">本月还可退票1次</span>-->
+				</div>
+				<div class="col-xs-3 col-sm-3 total_price">
+					<span id="total_price" style="font-size: 40pt;" th:each="info:${orderInfo}" th:text="${info.total}">38</span>元
+				</div>
+				
+				<!-- Btn -->
+				<div id="submit" class="col-xs-12 col-sm-12" style="padding: 0; margin-top: -3.5rem;">
+					<button  type="button" class="btn btn-warning" v-on:click="pay">确认支付</button>
+				</div>
+				
+			</div>
+		</nav>
+		<script type="application/javascript" th:inline="javascript">
+			new Vue({
+				el:"#submit",
+				data(){
+					return{
+						info:{
+							//返回订单号
+							orderId: [[${orderInfo.order_id}]]
+						}
+					}
+				},
+				methods:{
+					pay(){
+						var $url="/pay";
+						var data = this.info;
+						axios.post($url,data,
+								{
+									headers: {'Content-Type': 'application/json'}
+								}).then((response)=>{
+								if (response.status==200){
+									const div=document.createElement('divform');
+									div.innerHTML=response.data;
+									document.body.appendChild(div);
+									document.forms[0].acceptCharset='UTF-8';//保持与支付宝默认编码格式一致，如果不一致将会出现：调试错误，请回到请求来源地，重新发起请求，错误代码 invalid-signature 错误原因: 验签出错，建议检查签名字符串或签名私钥与应用公钥是否匹配
+									document.forms[0].submit();
+								}else{
+									this.$alert("错误："+response.data,"提示",{
+										confirmButtonText:'确定'
+									});
+								}
+						});
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

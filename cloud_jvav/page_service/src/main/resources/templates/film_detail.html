@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+	<head>
+		<meta charset="utf-8" />
+		<title>JVAV电影</title>
+		<link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/css/detail.css">
+		<link rel="stylesheet" href="/css/nav.css">
+		<link rel="stylesheet" href="/css/star-rating.css">
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<script src="/js/star-rating.js" type="text/javascript"></script>
+		<script src="/bootstrap-3.3.7-dist/js/bootstrap.js" type="text/javascript"></script>
+		<script src="/layer/layer.js" type="text/javascript"></script>
+<!--		<script src="/vue/vue.js"></script>-->
+<!--		<script src="/axios/axios.min.js"></script>-->
+		<script src="/js/detail.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/js/getQueryVar.js"></script>
+	</head>
+	<body>
+		<!-- Banner -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<a class="back" href="javascript:history.go(-1)"><span class="nav_login">影片详情</span></a>
+		</nav>
+
+		<!-- Detail -->
+		<div class="full-width-div">
+			<div class="row" id="film_detail" th:each="detail:${detailData}">
+				<!-- Top -->
+				<div class="col-xs-12 col-sm-12 img_background" th:style="'background-image:linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(/get/photo/film/'+${detail.film_pic}+')'">
+					<!-- Bill -->
+					<div class="col-xs-4 col-sm-4 playbill" th:style="'background: url(/get/photo/film/'+${detail.film_pic}+') no-repeat center'"></div>
+					<!-- Content -->
+					<div class="col-xs-8 col-sm-8 content">
+						<p class="content_title">[[${detail.film_name}]]</p>
+						<p class="content_subtitle">[[${detail.film_USname}]]</p>
+						<!-- Star -->
+						<form th:style="'z-index:999;'">
+<!--							th:value="${detail.film_grade}"-->
+							<input id="input-21b" th:value="8.9" type="text" class="rating" data-size="sm" required
+								   title="" disabled="true" />
+							<div class="clearfix"></div>
+						</form>
+<!--						<p class="content_demographics">(<span id="demographics">39.2</span>万人评)</p>-->
+						<p class="content_intro">[[${detail.film_desc}]]</p>
+						<p class="content_intro">[[${detail.film_region}]]/[[${detail.film_duration}]]分钟</p>
+						<p class="content_intro">[[${#dates.format(detail.film_show_time,'YYYY-MM-dd')}]][[${detail.film_region}]]上映</p>
+					</div>
+					<!-- Choose -->
+					<div class="col-xs-12 col-sm-12 content">
+						<div class="col-xs-6 col-sm-6 detail_btn">
+							<button type="button" class="btn btn-success" onclick="like()">
+								<span class="glyphicon glyphicon-heart" id="heart"></span>&nbsp;&nbsp;&nbsp;&nbsp;想看
+							</button>
+						</div>
+						<div class="col-xs-6 col-sm-6 detail_btn" th:each="detail:${detailData}">
+							<button type="button" class="btn btn-success" th:onclick="'rating('+${detail.film_id}+')'">
+								<span class="glyphicon glyphicon-star"></span>&nbsp;&nbsp;&nbsp;&nbsp;评分
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- Brief -->
+				<div class="col-xs-12 col-sm-12 brief_abstract">
+					<p th:each="detail:${detailData}">[[${detail.introduction}]]</p>
+				</div>
+
+				<!-- Staff -->
+				<div class="col-xs-12 col-sm-12 staff_abstract">
+					<p class="detail_title">演职人员</p>
+					<div class="staff_list">
+						<div th:each="item,index:${ators}" class="box1">
+							<div data-toggle="modal" th:data-target="'#actor'+${index.index}">
+								<img th:src="@{/get/photo/actor/{imgName}(imgName=${item.actor_picture})}">
+							</div>
+							<p class="acter_title">[[${item.actor_name}]]</p>
+							<p th:if="item.position == null" class="acter_subtitle">&nbsp;</p>
+							<p th:unless="item.position == null" class="acter_subtitle">[[${item.position}]]</p>
+						</div>
+						<!-- Artwork -->
+						<div class="modal fade" th:each="item,index:${ators}" th:id="'actor'+${index.index}" tabindex="-1" role="dialog"
+							 aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-body">
+										<!--											<img id="artwork" th:src=@{${still.still_url}}>-->
+										<img id="artwork" th:src="@{/get/photo/actor/{imgName}(imgName=${item.actor_picture})}">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Box Office -->
+<!--				<div class="col-xs-12 col-sm-12 box_abstract">-->
+<!--					<p class="detail_title">票房</p>-->
+<!--					<div class="col-xs-4 col-sm-4">-->
+<!--						<p class="box_count">2</p>-->
+<!--						<p class="box_intro">昨日票房排行</p>-->
+<!--					</div>-->
+<!--					<div class="col-xs-4 col-sm-4">-->
+<!--						<p class="box_count">34935</p>-->
+<!--						<p class="box_intro">首周票房(万)</p>-->
+<!--					</div>-->
+<!--					<div class="col-xs-4 col-sm-4">-->
+<!--						<p class="box_count">82334</p>-->
+<!--						<p class="box_intro">累计票房(万)</p>-->
+<!--					</div>-->
+<!--				</div>-->
+
+				<!-- Still -->
+				<div class="col-xs-12 col-sm-12 still_abstract">
+					<p class="detail_title">视频和剧照</p>
+					<div class="still_list">
+						<!-- Still1 -->
+						<div th:each="still,index:${stills}" class="still_box">
+							<div class="still_alone" data-toggle="modal" th:data-target="'#still'+${index.index}">
+<!--								th:src=@{${still.still_url}}-->
+								<img style="width:100%" id="still_img" onload="still_img()" th:src="@{/get/photo/stills/{imgName}(imgName=${still.still_url})}" >
+							</div>
+							<!-- Artwork -->
+							<div class="modal fade" th:id="'still'+${index.index}" tabindex="-1" role="dialog"
+								 aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-body">
+<!--											<img id="artwork" th:src=@{${still.still_url}}>-->
+											<img id="artwork" th:src="@{/get/photo/stills/{imgName}(imgName=${still.still_url})}">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Comment -->
+				<!-- Title -->
+				<div class="col-xs-12 col-sm-12 comment_abstract">
+					<div class="col-xs-6 col-sm-6" style="padding: 0;">
+						<p class="detail_title">观众评论</p>
+					</div>
+					<div class="col-xs-6 col-sm-6" th:each="detail:${detailData}">
+						<button type="button" class="btn btn-danger" th:onclick="'rating('+${detail.film_id}+')'">写短评</button>
+					</div>
+				</div>
+				<!-- Discuss -->
+				<div class="col-xs-12 col-sm-12 comment_background">
+					<!-- user1 -->
+					<div th:each="commentdata:${comments}" class="col-xs-12 col-sm-12">
+						<!-- header -->
+						<div class="col-xs-1 col-sm-1" style="padding: 0;">
+							<img class="user_head" th:src="@{'/user/get/head/'+${commentdata.user.user_head}}">
+						</div>
+						<!-- material -->
+						<div class="col-xs-10 col-sm-10 border">
+							<!-- username -->
+							<p class="username">[[${commentdata.user.user_name }]]</p>
+							<!-- star -->
+							<form>
+								<input id="input-21c" th:value="${commentdata.comment.film_grade}" type="text" class="rating" data-size="sm" required
+									   title="" disabled="true">
+								<div class="clearfix"></div>
+							</form>
+
+							<!-- review -->
+							<p class="review">
+								[[${commentdata.comment.film_comment}]]
+							</p>
+							<!-- data -->
+							<p class="data">[[${#dates.format(commentdata.comment.comment_date,'YYYY-MM-dd')}]]</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- View All Comment -->
+<!--				<a href="#">-->
+<!--					<div class="col-xs-12 col-sm-12 comment_all">-->
+<!--						<p class="view_all">-->
+<!--							查看全部<span id="view_count">19759</span>条观众评论-->
+<!--						</p>-->
+<!--					</div>-->
+<!--				</a>-->
+
+			</div>
+
+			<!-- Navigation bar -->
+			<a id="detailCinema">
+				<nav class="navbar navbar-default navbar-fixed-bottom" style="border: none;">
+					<p>优惠购票</p>
+				</nav>
+			</a>
+		</div>
+		<script th:if="${flag}">
+			var detailCinema = window.location.href+"/get";
+			$('#detailCinema').attr("href",detailCinema);
+		</script>
+		<script th:unless="${flag}">
+			var detailCinema = window.location.href+"/cinema"
+			$('#detailCinema').attr("href",detailCinema);
+		</script>
+		<script>
+			var $inp = $('#input-21b');
+			$inp.rating({
+				min: 0,
+				max: 10,
+				step: 0.1,
+				size: 'sm',
+				showClear: false,
+			});
+		</script>
+		<script>
+			var $inp = $('#input-21c');
+			$inp.rating({
+				min: 0,
+				max: 10,
+				step: 0.1,
+				size: 'sm',
+				showClear: false,
+			});
+		</script>
+	</body>
+</html>

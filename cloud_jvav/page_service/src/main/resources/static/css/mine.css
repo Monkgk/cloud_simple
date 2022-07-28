@@ -1,0 +1,107 @@
+/* All */
+body {
+	background: #f5f5f5;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.full-width-div {
+	margin-top: 13rem;
+	margin-bottom: 14.7rem;
+	text-align: center;
+}
+
+.row {
+	margin-left: 0px;
+	margin-right: 0px;
+	table-layout: fixed;
+}
+
+/* Login */
+.login {
+	padding: 0;
+	margin: 0;
+}
+
+.login_bk {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	transform: translateZ(0);
+	padding: 0;
+	margin: 0;
+	background-image: linear-gradient(#dd3f3b, #e75f5b);
+	height: 55rem;
+}
+
+.login_bk img {
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+.logined {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+.logined img {
+	margin-top: 13%;
+	border: none;
+	border-radius: 50%;
+	width:25rem;
+	height:25rem;
+}
+.logined p{
+	font-size: 30pt;
+	color: white;
+	margin-top: 2%;
+}
+.btn-default {
+	position: absolute;
+	padding: 2.3rem 17rem;
+	border: none;
+	border-radius: 50rem;
+	font-size: 37pt;
+	box-shadow: 0 0 30px #ad2522;
+}
+
+.analysis {
+	padding: 2rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 31rem;
+}
+
+.margin-bottom {
+	margin-bottom: 3rem;
+}
+
+.border-top {
+	border-top: #e6e6e6 solid .15rem;
+}
+
+.more {
+	padding: 2rem;
+	border-bottom: #e6e6e6 solid .15rem;
+	background: #fefefe;
+	height: 12rem;
+	line-height: 8rem;
+}
+
+.more p {
+	float: left;
+	font-size: 30pt;
+	color: #1f1f1f;
+}
+
+.more span {
+	margin-top: 2rem;
+	font-size: 30pt;
+	color: #cccccc;
+}
+
+.mine_right {
+	height: 100%;
+	background: url(../img/ui/right.png) no-repeat center;
+	background-size: 20%;
+}
